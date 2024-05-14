@@ -27,7 +27,7 @@ const VideoCard = ({src, title, description, userId, time, id}) => {
                         <p className='textOverflow'> {description}</p>
                         <div className='flex justify-between mt-2 w-full'>
                             <p>BY: {user.fullName? `${user.fullName}` : "YOU" }</p>
-                            <p>{(time/60).toFixed(0)} min</p>
+                            <p>{parseInt(time/60)}:{(time%60).toFixed(0)} min</p>
                         </div>
                     </div>
                 </div>

@@ -129,6 +129,7 @@ const Upload = () => {
                             setThumbnail(x);
                         }}
                         />
+                        <p className='text-gray-500'><span className='text-red-500'>*</span>Uplaod videos of size below 100 mb</p>
                     </div>
                     <div className="flex justify-end gap-[25px]">
                         <AlertDialog.Cancel asChild>

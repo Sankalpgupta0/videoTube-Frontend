@@ -119,6 +119,11 @@ const CurrentVideo = () => {
         setComment("");
     }
 
+    const StartVideo = (e) => {
+        const currentTime = localStorage.getItem(`${videoId}`) || 0;
+        e.currentTarget.currentTime = currentTime;
+    }
+
     if(loading){
         return (
             <h1>Loading...</h1>
@@ -140,7 +145,15 @@ const CurrentVideo = () => {
             </div>
         }
         <div className='w-full mt-10 overflow-y-scroll'>
-            <video src={video.videoFile} className=' aspect-video' controls></video>
+            <video 
+            src={video.videoFile} 
+            className=' aspect-video max-h-screen' 
+            controls 
+            onTimeUpdate={e => localStorage.setItem(`${videoId}`,(e.currentTarget.currentTime))}
+            onPlay={StartVideo}
+            >
+
+            </video>
             <h1 className='text-center text-3xl text-gray-200'>{video.title}</h1>
             <p className='text-center text-gray-400'>{video.description}</p>
             <div className='w-full flex justify-between px-10 max-md:flex-col items-center'>
