@@ -12,6 +12,8 @@ import Home from './components/Home/Home.jsx'
 import GetAllVideos from '../src/components/video/GetAllVideos.jsx'
 import CurrentVideo from './components/video/CurrentVideo.jsx'
 import YourChannel from './components/YourChannel/YourChannel.jsx'
+import Setting from './components/setting/Setting.jsx'
+import History from './components/history/History.jsx'
 
 const router = createBrowserRouter([
   {
@@ -41,6 +43,14 @@ const router = createBrowserRouter([
           {
             path: '/home/yourchannel',
             element: <YourChannel />
+          },
+          {
+            path:'/home/setting',
+            element:<Setting/>
+          },
+          {
+            path:'/home/history',
+            element:<History/>
           }
         ]
       },

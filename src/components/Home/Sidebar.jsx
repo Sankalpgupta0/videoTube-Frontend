@@ -7,20 +7,10 @@ import { RiFolderHistoryFill } from "react-icons/ri";
 import { IoMdSettings } from "react-icons/io";
 import { RiLogoutBoxFill } from "react-icons/ri";
 import axios from 'axios'
-import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
     const open = useSelector((state) => state.sidebarReducer.open);
-    const navigate = useNavigate();
-
-    const logoutHandler = async() => {
-        const url = '/api/users/logout'
-        const response = await axios.post(url)
-        .then((res) => {
-            console.log(res.data.message)
-            navigate("/login")
-        })
-    }
+    
     return (
         <div className={`w-full h-screen flex`}>
 
@@ -50,17 +40,17 @@ const Sidebar = () => {
 
                 <NavLink 
                     className=" hover:bg-black px-2 py-5 rounded-lg" 
-                    to={"/home/setting"}
+                    to={"/home/Setting"}
                 >
                     <IoMdSettings size={30} color="white"/>
                 </NavLink>
 
-                <button 
+                {/* <button 
                     className=" hover:bg-black px-2 py-5 rounded-lg" 
                     onClick={logoutHandler}
                 >
                     <RiLogoutBoxFill size={30} color="white"/>
-                </button>
+                </button> */}
             </div>
             <div
                 className={`${open ? "" : "hidden"} text-gray-400  text-xl bg-black/90 w-3/4 h-full flex flex-col items-start  gap-5`}
@@ -85,16 +75,16 @@ const Sidebar = () => {
 
                 <NavLink 
                 className=" ml-5 px-2 py-5 hover:text-white" 
-                to={"/home/setting"}>
+                to={"/home/Setting"}>
                     Setting
                 </NavLink>
 
-                <button 
+                {/* <button 
                 className=" ml-5 px-2 py-5 hover:text-white" 
                 onClick={logoutHandler}
                 >
                     Logout
-                </button>
+                </button> */}
             </div>
         </div>
     );

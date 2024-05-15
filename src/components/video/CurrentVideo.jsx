@@ -97,7 +97,13 @@ const CurrentVideo = () => {
             setOwner(false)
     }
 
+    const addVideoToHistory = () => {
+        const url = `/api/users/AddToHistory/${videoId}`
+        axios.patch(url)
+    }
+
     useEffect(() => {
+        addVideoToHistory()
         getVideoByVideoId()
         getAllComments()
         handleSubscriber()
