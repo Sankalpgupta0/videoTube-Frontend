@@ -19,62 +19,65 @@ const CurrentVideo = () => {
     const [comment, setComment] = useState('')
     const [owner, setOwner] = useState(false)
 
-    const {videoId} = useParams();
-    
-    const getVideoByVideoId = async() => {
+    const [currentUser, setCurrentUser] = useState("")
+    const [playlist, setPlaylist] = useState([])
+
+    const { videoId } = useParams();
+
+    const getVideoByVideoId = async () => {
         setLoading(true)
         const response = await axios.get(`/api/videos/${videoId}`)
-        .then((res) => {
-            setVideo(res.data.data);
-            // console.log(res.data.data.owner);
-            getUserByUserId(res.data.data.owner)
-        })
+            .then((res) => {
+                setVideo(res.data.data);
+                // console.log(res.data.data.owner);
+                getUserByUserId(res.data.data.owner)
+            })
         setLoading(false)
     }
 
-    const getUserByUserId = async(userId) => {
+    const getUserByUserId = async (userId) => {
         const url = `/api/users/u/${userId}`
         const response = await axios.get(url)
-        .then((res) => {
-            setUser(res.data.data.user)
-            // console.log(res.data.data.user);
-            // getSubscriberCount(res.data.data.user.fullName)
-        })
+            .then((res) => {
+                setUser(res.data.data.user)
+                // console.log(res.data.data.user);
+                // getSubscriberCount(res.data.data.user.fullName)
+            })
 
     }
 
-    const getSubscriberCount = async(username) => {
+    const getSubscriberCount = async (username) => {
         // console.log(username);
         const url = `/api/users/c/${username}`
         const response = await axios.get(url)
-        .then((res)=>{
-            setSubs(res.data.data)
-        })
-    }
-    
-    const handleLike = async() => {
-        const url = `/api/likes/toggle/v/${videoId}`
-        const response = await axios.post(url)
-        .then((res) => {
-            setLike(res.data.data.isLiked);
-        })
-        .catch((err) => console.log(err))
+            .then((res) => {
+                setSubs(res.data.data)
+            })
     }
 
-    const handleSubscriber = async() => {
+    const handleLike = async () => {
+        const url = `/api/likes/toggle/v/${videoId}`
+        const response = await axios.post(url)
+            .then((res) => {
+                setLike(res.data.data.isLiked);
+            })
+            .catch((err) => console.log(err))
+    }
+
+    const handleSubscriber = async () => {
         const resp = await axios.get(`/api/videos/${videoId}`)
         const url1 = `/api/subscriptions/c/${resp.data.data.owner}`
         const response = await axios.post(url1)
-            setSubscribed(response.data.data.subscribed)
-            const url = `/api/users/u/${resp.data.data.owner}`
-            const respo = await axios.get(url)
+        setSubscribed(response.data.data.subscribed)
+        const url = `/api/users/u/${resp.data.data.owner}`
+        const respo = await axios.get(url)
             .then((res) => {
                 // console.log(res.data.data.user.username);
                 getSubscriberCount(res.data.data.user.username)
             })
-    } 
+    }
 
-    const getAllComments = async() => {
+    const getAllComments = async () => {
         setLoadingCommnets(true)
         const url = `/api/comments/${videoId}`
         const res = await axios.get(url)
@@ -82,37 +85,29 @@ const CurrentVideo = () => {
         setLoadingCommnets(false)
     }
 
-    const getCurrentUser = async() => {
+    const getCurrentUser = async () => {
         const url = `/api/users/current-user`
         const res = await axios.get(url)
-        
+
         const resp = await axios.get(`/api/videos/${videoId}`)
 
         const url2 = `/api/users/u/${resp.data.data.owner}`
         const response = await axios.get(url2)
 
-        if(res.data.data._id == response.data.data.user._id)
+        if (res.data.data._id == response.data.data.user._id)
             setOwner(true)
-        else 
+        else
             setOwner(false)
     }
 
     const addVideoToHistory = () => {
         const url = `/api/users/AddToHistory/${videoId}`
-        axios.patch(url)
+        const res = axios.patch(url)
     }
 
-    useEffect(() => {
-        addVideoToHistory()
-        getVideoByVideoId()
-        getAllComments()
-        handleSubscriber()
-        handleLike(videoId)
-        getCurrentUser()
-    },[])
-
+    
     const addComment = async () => {
-        if(comment.trim().length === 0){
+        if (comment.trim().length === 0) {
             alert("Please enter a comment berofe posting")
             return;
         }
@@ -124,13 +119,35 @@ const CurrentVideo = () => {
         getAllComments();
         setComment("");
     }
-
+    
     const StartVideo = (e) => {
         const currentTime = localStorage.getItem(`${videoId}`) || 0;
         e.currentTarget.currentTime = currentTime;
     }
 
-    if(loading){
+    const getcurrentUserPlaylist = async() => {
+        const url = '/api/users/current-user'
+        const response = await axios.get(url)
+        // console.log(response.data.data);
+        setCurrentUser(response.data.data)
+        
+        const url2 = `/api/playlist/user/${response.data.data._id}`
+        const response2 = await axios.get(url2)
+        // console.log(response2.data.data);
+        setPlaylist(response2.data.data)
+    }
+    
+    useEffect(() => {
+        getcurrentUserPlaylist()
+        addVideoToHistory()
+        getVideoByVideoId()
+        getAllComments()
+        handleSubscriber()
+        handleLike(videoId)
+        getCurrentUser()
+    }, [])
+
+    if (loading) {
         return (
             <h1>Loading...</h1>
         )
@@ -138,83 +155,88 @@ const CurrentVideo = () => {
 
     return (
         <>
-        {
-            //give options of edit and  delete for creator only
-            owner && <div className='h-20 w-full flex justify-between items-center'>
-                <div>
-
-                </div>
-                <div className='flex justify-between gap-10 mx-10'>
-                    <EditVideo tit={video.title} descprit={video.description}/> 
-                    <DeleteVideo/>
-                </div>
-            </div>
-        }
-        <div className='w-full mt-10 overflow-y-scroll'>
-            <video 
-            src={video.videoFile} 
-            className=' aspect-video max-h-screen' 
-            controls 
-            onTimeUpdate={e => localStorage.setItem(`${videoId}`,(e.currentTarget.currentTime))}
-            onPlay={StartVideo}
-            >
-
-            </video>
-            <h1 className='text-center text-3xl text-gray-200'>{video.title}</h1>
-            <p className='text-center text-gray-400'>{video.description}</p>
-            <div className='w-full flex justify-between px-10 max-md:flex-col items-center'>
-                <div className='flex gap-10 max-md:gap-2'>
-                    <img src={user.avatar} className='h-12 rounded-full aspect-square'/>
-                    <div className='text-white gap-10 max-md:gap-2'>
-                        <h1 className='text-lg'>{user.fullName}</h1>
-                        <p>{subs.subscribersCount}</p>
-                    </div>
-                    <button 
-                    onClick={handleSubscriber}
-                    className={`${subscribed ? "hover:bg-gray-500 bg-red-600" : "bg-gray-500 hover:bg-red-600"}  px-8 py-4 rounded-full  text-xl text-white`}>
-                        {subscribed ? "subscribed" : "subscribe"}
-                    </button>
-                </div>
-                <button className="" onClick={handleLike}>
-                    {like ? <BiSolidLike size={30} color='white'/> : <BiLike color='white' size={30}/>}
-                </button>
-            </div>
-        </div>
-
-        <div className='mt-20 px-10'>
-            <div className=''>
-                <p className='text-sm text-[#D9E8FCB0] pl-5'>Add Comment</p>
-                <input 
-                type='text'
-                className='max-lg:w-3/5 pl-5 outline-none border-none h-10 rounded-md w-3/4 max-md:w-full text-white bg-[#ADC8EB24]/10 hover:bg-[#ADC8EB24]' 
-                value={comment} 
-                onChange={(e) => setComment(e.target.value)}
-                onKeyDown={(e) => {
-                    if(e.key === 'Enter') addComment()
-                }}
-                />
-                <button 
-                onClick={addComment}
-                className='bg-gray-400 h-10 w-10 rounded-lg hover:bg-gray-600 text-white'>
-                    Add
-                </button>
-                <hr className='mt-5'/>
-            </div>
             {
-                loadingComments ? 
-                <h1>Loading comments ...</h1>:
-                <div className='mt-20 '>
-                    {
-                        comments.map((com) => {
-                            return (
-                                <CommentCard key={com._id} ownerId={com.owner} content={com.content} createdAt={com.createdAt} id={com._id}/>
-                            )
-                        })
-                    }
+                //give options of edit and  delete for creator only
+                owner && <div className='h-20 w-full flex justify-between items-center'>
+                    <div>
+
+                    </div>
+                    <div className='flex justify-between gap-10 mx-10'>
+                        <EditVideo tit={video.title} descprit={video.description} />
+                        <DeleteVideo />
+                    </div>
                 </div>
             }
+            <div className='w-full mt-10 overflow-y-scroll'>
+                <video
+                    src={video.videoFile}
+                    className=' aspect-video max-h-screen'
+                    controls
+                    onTimeUpdate={e => localStorage.setItem(`${videoId}`, (e.currentTarget.currentTime))}
+                    onPlay={StartVideo}
+                >
 
-        </div>
+                </video>
+                <h1 className='text-center text-3xl text-gray-200'>{video.title}</h1>
+                <p className='text-center text-gray-400'>{video.description}</p>
+                <div className='w-full flex justify-between px-10 max-md:flex-col items-center'>
+                    <div className='flex gap-10 max-md:gap-2'>
+                        <img src={user.avatar} className='h-12 rounded-full aspect-square' />
+                        <div className='text-white gap-10 max-md:gap-2'>
+                            <h1 className='text-lg'>{user.fullName}</h1>
+                            <p>{subs.subscribersCount}</p>
+                        </div>
+                        <button
+                            onClick={handleSubscriber}
+                            className={`${subscribed ? "hover:bg-gray-500 bg-red-600" : "bg-gray-500 hover:bg-red-600"}  px-8 py-4 rounded-full  text-xl text-white`}>
+                            {subscribed ? "subscribed" : "subscribe"}
+                        </button>
+                    </div>
+                    <button className='hover:bg-black text-white text-lg px-5 py-2 rounded-full bg-transparent border-none outline-none'>
+                        Add video to playlist
+                    </button>
+
+                    <button className="" onClick={handleLike}>
+                        {like ? <BiSolidLike size={30} color='white' /> : <BiLike color='white' size={30} />}
+                    </button>
+                </div>
+            </div>
+
+            
+            <div className='mt-20 px-10'>
+                <div className=''>
+                    <p className='text-sm text-[#D9E8FCB0] pl-5'>Add Comment</p>
+                    <input
+                        type='text'
+                        className='max-lg:w-3/5 pl-5 outline-none border-none h-10 rounded-md w-3/4 max-md:w-full text-white bg-[#ADC8EB24]/10 hover:bg-[#ADC8EB24]'
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') addComment()
+                        }}
+                    />
+                    <button
+                        onClick={addComment}
+                        className='bg-gray-400 h-10 w-10 rounded-lg hover:bg-gray-600 text-white'>
+                        Add
+                    </button>
+                    <hr className='mt-5' />
+                </div>
+                {
+                    loadingComments ?
+                        <h1>Loading comments ...</h1> :
+                        <div className='mt-20 '>
+                            {
+                                comments.map((com) => {
+                                    return (
+                                        <CommentCard key={com._id} ownerId={com.owner} content={com.content} createdAt={com.createdAt} id={com._id} />
+                                    )
+                                })
+                            }
+                        </div>
+                }
+
+            </div>
         </>
     )
 }

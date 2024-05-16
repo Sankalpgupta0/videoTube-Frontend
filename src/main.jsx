@@ -14,6 +14,9 @@ import CurrentVideo from './components/video/CurrentVideo.jsx'
 import YourChannel from './components/YourChannel/YourChannel.jsx'
 import Setting from './components/setting/Setting.jsx'
 import History from './components/history/History.jsx'
+import Playlist from './components/playlist/Playlist.jsx'
+import ViewPlaylist from './components/playlist/ViewPlaylist.jsx'
+import AllPlaylist from './components/playlist/AllPlaylist.jsx'
 
 const router = createBrowserRouter([
   {
@@ -51,7 +54,22 @@ const router = createBrowserRouter([
           {
             path:'/home/history',
             element:<History/>
-          }
+          },
+          {
+            path:'/home/playlist',
+            element:<Playlist/>,
+            children:[
+              {
+                path:'/home/playlist',
+                element:<AllPlaylist/>,
+              },
+              {
+                path:'/home/playlist/:playlistId',
+                element: <ViewPlaylist/>
+              }
+            ]
+
+          },
         ]
       },
       

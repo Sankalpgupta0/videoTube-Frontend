@@ -13,7 +13,7 @@ const Home = () => {
         <div className={`${open? "w-[24%] " : "w-[6%] "} fixed max-md:hidden`}>
           <Sidebar/>
         </div>
-        <div className={`${open? "w-[76%] ml-[24%] " : "w-[94%] ml-[6%]"} bg-black/90 max-md:w-[100%] max-md:ml-[0%]`}>
+        <div className={`${open? "w-[76%] ml-[24%] " : "w-[94%] ml-[6%]"} bg-black/90 max-md:w-[100%] max-md:ml-[0%] sticky`}>
           <Outlet/> 
         </div>
       </div>

@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { RiFolderHistoryFill } from "react-icons/ri";
 import { IoMdSettings } from "react-icons/io";
 import { RiLogoutBoxFill } from "react-icons/ri";
+import { MdPlaylistAddCircle } from "react-icons/md";
 import axios from 'axios'
 
 const Sidebar = () => {
@@ -40,17 +41,18 @@ const Sidebar = () => {
 
                 <NavLink 
                     className=" hover:bg-black px-2 py-5 rounded-lg" 
+                    to={"/home/playlist"}
+                >
+                    <MdPlaylistAddCircle size={30} color="white"/>
+                </NavLink>
+
+                <NavLink 
+                    className=" hover:bg-black px-2 py-5 rounded-lg" 
                     to={"/home/Setting"}
                 >
                     <IoMdSettings size={30} color="white"/>
                 </NavLink>
 
-                {/* <button 
-                    className=" hover:bg-black px-2 py-5 rounded-lg" 
-                    onClick={logoutHandler}
-                >
-                    <RiLogoutBoxFill size={30} color="white"/>
-                </button> */}
             </div>
             <div
                 className={`${open ? "" : "hidden"} text-gray-400  text-xl bg-black/90 w-3/4 h-full flex flex-col items-start  gap-5`}
@@ -75,16 +77,16 @@ const Sidebar = () => {
 
                 <NavLink 
                 className=" ml-5 px-2 py-5 hover:text-white" 
+                to={"/home/playlist"}>
+                    Your Playlist
+                </NavLink>
+
+                <NavLink 
+                className=" ml-5 px-2 py-5 hover:text-white" 
                 to={"/home/Setting"}>
                     Setting
                 </NavLink>
 
-                {/* <button 
-                className=" ml-5 px-2 py-5 hover:text-white" 
-                onClick={logoutHandler}
-                >
-                    Logout
-                </button> */}
             </div>
         </div>
     );
