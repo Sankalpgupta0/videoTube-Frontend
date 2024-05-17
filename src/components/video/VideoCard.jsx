@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import RevomeVideoFromPlaylist from '../playlist/RevomeVideoFromPlaylist.jsx';
 
-const VideoCard = ({src, title, description, userId, time, id}) => {
+const VideoCard = ({src, title, description, userId, time, id, inPlaylist=false, playlistId=""}) => {
     const [user, setUser] = useState([]);
     const getUserByUserId = async(userId) => {
         const url = `/api/users/u/${userId}`
@@ -30,6 +31,9 @@ const VideoCard = ({src, title, description, userId, time, id}) => {
                             <p>{parseInt(time/60)}:{(time%60).toFixed(0)} min</p>
                         </div>
                     </div>
+                    {
+                        inPlaylist && <RevomeVideoFromPlaylist videoId={id} playlistId={playlistId}/>
+                    }
                 </div>
             </div>
         </Link>

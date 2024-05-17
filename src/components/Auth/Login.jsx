@@ -67,9 +67,9 @@ const Login = () => {
             }
         }
 
-        await axios.post(url, data)
+        axios.post(url, data)
             .then((res) => {
-                console.log(res.data.data);
+                alert("login successfully")
                 // ways to set cookies from frontend
                 /* 1. Using the browser's built-in functionality */
                 // document.cookie =  `accessToken : ${res.data.data.accessToken}`;
@@ -83,7 +83,7 @@ const Login = () => {
                 setLoading(false);
             })
             .catch((err) => {
-                setToastMessage(err.response.data.slice(111, 150));
+                alert(err.response.data.slice(111, 145));
                 setLoading(false)
             })
         setLoading(false);

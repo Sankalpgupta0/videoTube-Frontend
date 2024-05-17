@@ -49,6 +49,8 @@ const ViewPlaylist = () => {
                             time={video.duration}
                             userId={video.owner}
                             id={video._id}
+                            inPlaylist={true}
+                            playlistId={playlistId}
                         />
                     ) 
                     :<div> </div>

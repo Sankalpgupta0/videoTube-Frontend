@@ -17,6 +17,7 @@ import History from './components/history/History.jsx'
 import Playlist from './components/playlist/Playlist.jsx'
 import ViewPlaylist from './components/playlist/ViewPlaylist.jsx'
 import AllPlaylist from './components/playlist/AllPlaylist.jsx'
+import Chat from './components/community/Chat.jsx'
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
           {
             path:'/home/history',
             element:<History/>
+          },
+          {
+            path:'/home/community',
+            element:<Chat/>
           },
           {
             path:'/home/playlist',
