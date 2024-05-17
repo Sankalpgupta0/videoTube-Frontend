@@ -9,7 +9,7 @@ const Home = () => {
   return (  
     <>
       <Navbar/>
-      <div className='flex w-screen pt-[56px]'>
+      <div className='flex w-screen pt-[56px] overflow-x-hidden'>
         <div className={`${open? "w-[24%] " : "w-[6%] "} fixed max-md:hidden`}>
           <Sidebar/>
         </div>

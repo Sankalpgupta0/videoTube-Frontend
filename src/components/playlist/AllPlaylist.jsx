@@ -24,9 +24,9 @@ const AllPlaylist = () => {
     },[])
 
     return (
-        <div className='w-full h-screen sticky'>
+        <div className='w-full h-fit min-h-screen sticky'>
             <Navbar />
-            <div className='grid grid-cols-2 max-md:grid-cols-1 gap-5 p-2 w-full h-screen overflow-y-scroll '>
+            <div className='grid grid-cols-2 max-md:grid-cols-1 gap-5 p-2 w-full h-fit min-h-screen overflow-y-scroll '>
                 {
                     playlist.map((list, index) => {
                         return <PlaylistCard key={index} list={list} />

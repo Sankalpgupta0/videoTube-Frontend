@@ -22,7 +22,7 @@ const GetAllVideos = () => {
 
     return (
         <>
-            <div className='grid grid-cols-4 max-lg:grid-cols-2 max-md:grid-cols-1 gap-5 p-2 w-full h-screen overflow-y-scroll'>
+            <div className='grid grid-cols-4 max-lg:grid-cols-2 max-md:grid-cols-1 gap-5 p-2 w-full h-[95vh] overflow-y-scroll'>
                     {
                         videos.map((video) => {
                             return (

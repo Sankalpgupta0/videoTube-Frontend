@@ -15,7 +15,7 @@ const History = () => {
         GetHistory()
     },[])   
     return (
-        <div className='w-full h-screen grid grid-cols-4 max-lg:grid-cols-2 max-md:grid-cols-1 gap-5 p-2  overflow-y-scroll'>
+        <div className='w-full h-[95vh] grid grid-cols-4 max-lg:grid-cols-2 max-md:grid-cols-1 gap-5 p-2  overflow-y-scroll'>
             {
                 history.map((video, index) => {
                     return <VideoCard 

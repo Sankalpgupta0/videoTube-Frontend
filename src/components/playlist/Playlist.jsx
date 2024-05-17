@@ -25,7 +25,7 @@ const Playlist = () => {
     },[])
 
     return (
-        <div className='w-full h-screen sticky'>
+        <div className='w-full h-[95vh] sticky'>
             <Outlet/>
         </div>
     )

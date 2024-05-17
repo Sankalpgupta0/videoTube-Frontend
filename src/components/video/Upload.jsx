@@ -42,7 +42,7 @@ const Upload = () => {
 
     if(uploading) {
         return (
-            <div className='w-screen h-screen absolute text-center bg-black/70 z-20 top-0 left-0 text-white text-3xl'>Uploading under process please wait... <br /> Do not touch key or process may be reverted ...</div>
+            <div className='w-screen h-[91vh] absolute text-center bg-black/70 z-20 top-0 left-0 text-white text-3xl'>Uploading under process please wait... <br /> Do not touch key or process may be reverted ...</div>
         );
     }
 
