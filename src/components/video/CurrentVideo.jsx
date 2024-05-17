@@ -21,6 +21,7 @@ const CurrentVideo = () => {
 
     const [currentUser, setCurrentUser] = useState("")
     const [playlist, setPlaylist] = useState([])
+    const [playlistLoading, setPlaylistLoading] = useState(false)
 
     const { videoId } = useParams();
 
@@ -192,9 +193,44 @@ const CurrentVideo = () => {
                             {subscribed ? "subscribed" : "subscribe"}
                         </button>
                     </div>
-                    <button className='hover:bg-black text-white text-lg px-5 py-2 rounded-full bg-transparent border-none outline-none'>
+                    <button 
+                    onClick={() => setPlaylistLoading(true)}
+                    className='hover:bg-black text-white text-lg px-5 py-2 rounded-full bg-transparent border-none outline-none'>
                         Add video to playlist
                     </button>
+
+                    {
+                        playlistLoading? <div className=' absolute top-1/4 h-fit w-1/3 bg-black'>
+                            <div className='w-full h-full flex justify-center items-center flex-col '>
+                                {
+                                    playlist.map((list, index) => {
+                                        return <div className='flex justify-between gap-y-10 hover:bg-gray-800 px-5 py-2 rounded-xl'>
+                                                    <div className=''>
+                                                        <h1 className='text-white text-xl'>{list.name}</h1>
+                                                        <p className='text-xs  '>{list._id}</p>
+                                                    </div>
+                                                    <button 
+                                                    onClick={async() => {
+                                                        const url = `/api/playlist/add/${videoId}/${list._id}`
+                                                        axios.patch(url)
+                                                        .then(() => alert(`Video is added to ${list.name} playlist`))
+                                                        .catch(() => alert(`video already exists in the playlist`))
+                                                        
+                                                    }}
+                                                    className='text-white p-5 rounded-2xl hover:bg-gray-500 '> 
+                                                        Add
+                                                    </button>
+                                            </div>
+                                    })
+                                }
+                                <button className='bg-gray-800 hover:bg-black px-10 py-5 rounded-full text-white text-2xl my-5' onClick={() => setPlaylistLoading(false)}>
+                                    Close
+                                </button>
+                            </div>
+
+                        </div> : ""
+                    }
+                    
 
                     <button className="" onClick={handleLike}>
                         {like ? <BiSolidLike size={30} color='white' /> : <BiLike color='white' size={30} />}
@@ -202,7 +238,7 @@ const CurrentVideo = () => {
                 </div>
             </div>
 
-            
+            {/* comment section */}
             <div className='mt-20 px-10'>
                 <div className=''>
                     <p className='text-sm text-[#D9E8FCB0] pl-5'>Add Comment</p>
