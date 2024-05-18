@@ -20,7 +20,7 @@ const Upload = () => {
 
             const formData = new FormData();
             formData.append('title', title);
-            formData.append('descprition', descprition);
+            formData.append('description', descprition);
             formData.append('videoFile', videoFile);
             formData.append('thumbnail', thumbnail);
             

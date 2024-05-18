@@ -51,7 +51,8 @@ const Register = () => {
             response.then(navigate('/login'))
             } catch (error) {
                 setLoading(false)
-                console.log('Error uploading data:', error.response?.data);
+                alert((error.response?.data).slice(111, 145));
+                
         }
     } else{
         alert("pasword do not match")
