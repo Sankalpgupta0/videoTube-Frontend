@@ -3,6 +3,10 @@
         {
             "source": "/api/:path*",
             "destination": "https://videotube-backend-akxz.onrender.com/api/:path*"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/"
         }
     ]
 }
