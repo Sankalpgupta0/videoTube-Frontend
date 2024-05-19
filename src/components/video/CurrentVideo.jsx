@@ -200,7 +200,7 @@ const CurrentVideo = () => {
                     </button>
 
                     {
-                        playlistLoading? <div className=' absolute top-1/4 h-fit w-1/3 bg-black'>
+                        playlistLoading? <div className='w-full absolute top-1/4 h-fit w-1/3 bg-black'>
                             <div className='w-full h-full flex justify-center items-center flex-col '>
                                 {
                                     playlist.map((list, index) => {
