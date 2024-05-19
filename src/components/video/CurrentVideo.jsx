@@ -155,7 +155,7 @@ const CurrentVideo = () => {
     }
 
     return (
-        <>
+        <div className='w-full min-h-screen'>
             {
                 //give options of edit and  delete for creator only
                 owner && <div className='h-20 w-full flex justify-between items-center'>
@@ -273,7 +273,7 @@ const CurrentVideo = () => {
                 }
 
             </div>
-        </>
+        </div>
     )
 }
 

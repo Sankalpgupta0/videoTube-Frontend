@@ -23,7 +23,7 @@ const PlaylistCard = ({list}) => {
     return (
         <div className='w-full h-full'>
             <div 
-            className='w-full h-full bg-[#1e1e1e] hover:bg-black rounded-lg p-5 cursor-pointer flex' 
+            className='w-full h-[400px] bg-[#1e1e1e] hover:bg-black rounded-lg p-5 cursor-pointer flex' 
             >
                 <div className='w-1/2 h-full  flex flex-col ' onClick={() => navigate(`/home/playlist/${list._id}`)}>
                     <img src={list.videos[0]? video: "/defaultPlaylistImage.png"} className=' shadow-2xl rounded-xl aspect-square w-full' />

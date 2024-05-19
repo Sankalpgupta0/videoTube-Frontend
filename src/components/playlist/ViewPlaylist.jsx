@@ -34,7 +34,7 @@ const ViewPlaylist = () => {
     },[])
 
     return (
-        <div className='grid grid-cols-4 max-lg:grid-cols-2 max-md:grid-cols-1 gap-5 p-2 w-full h-[95vh] overflow-y-scroll'>
+        <div className='grid grid-cols-4 max-lg:grid-cols-2 max-md:grid-cols-1 gap-5 p-2 w-full h-[100vh] overflow-y-scroll'>
             {
                 videoDetails.length == 0 ? <h1 className='text-2xl text-white text-nowrap text-center'>There are no videos in this playlist</h1> :
                 loading? <h1 className='text-white text-2xl'>Loading</h1> :
