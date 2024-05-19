@@ -51,7 +51,7 @@ const Register = () => {
             response.then(navigate('/login'))
             } catch (error) {
                 setLoading(false)
-                alert((error.response?.data).slice(111, 145));
+                alert("error occurred try again");
                 
         }
     } else{

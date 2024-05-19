@@ -83,7 +83,7 @@ const Login = () => {
                 setLoading(false);
             })
             .catch((err) => {
-                alert(err.response.data.slice(111, 145));
+                alert("error occurred try again");
                 setLoading(false)
             })
         setLoading(false);
