@@ -11,7 +11,6 @@ const sidebarSlice = createSlice({
     reducers: {
         toggle : (state) => {
             state.open = !state.open 
-            console.log(state.open);
         }
     }
 

@@ -18,6 +18,7 @@ import Playlist from './components/playlist/Playlist.jsx'
 import ViewPlaylist from './components/playlist/ViewPlaylist.jsx'
 import AllPlaylist from './components/playlist/AllPlaylist.jsx'
 import Chat from './components/community/Chat.jsx'
+import Sidebar from './components/Home/Sidebar.jsx'
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path:'/login',
         element:<Login/>
+      },
+      {
+        path:'/sidebar',
+        element:<Sidebar/>
       },
       {
         path:'/home',
