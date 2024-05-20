@@ -51,6 +51,7 @@ const Register = () => {
             response.then(navigate('/login'))
             } catch (error) {
                 setLoading(false)
+                alert("error occurred try again");
         }
     } else{
         alert("pasword do not match")
