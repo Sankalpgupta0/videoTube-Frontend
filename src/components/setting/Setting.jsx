@@ -17,7 +17,7 @@ const Setting = () => {
 
     return (
         <div className='w-full h-[100vh] flex py-10 justify-center items-center' >
-            <div className='w-2/3 h-2/4  bg-black/90 max-md:bg-transparent rounded-2xl flex justify-center items-center'>
+            <div className='w-2/3 h-2/4  bg-black/90 max-md:bg-transparent rounded-2xl'>
                 <div className="theme flex justify-between mx-40 text-white my-10  text-xl items-center">
                     <p>Theme</p>
                     <select 
