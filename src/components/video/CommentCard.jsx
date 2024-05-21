@@ -21,9 +21,18 @@ const CommentCard = ({ownerId, content, createdAt, id}) => {
     const handleLike = async() => {
         const url = `/api/likes/toggle/c/${id}`
         const response = await axios.post(url)
-            setLike(response.data.data.isLiked);
-
+        getCommentIsLiked()
     }
+
+
+    const getCommentIsLiked = async() => {
+        const url = `/api/likes/isLiked/c/${id}`
+        const response = await axios.get(url)
+        setLike(response.data.data? true:false)
+    }
+    useEffect(() => {
+        getCommentIsLiked()
+    },[])
 
     useEffect(() => {
         getUserByUserId(ownerId);

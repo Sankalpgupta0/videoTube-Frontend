@@ -13,7 +13,6 @@ const CurrentVideo = () => {
     const [subs, setSubs] = useState(0);
     const [loading, setLoading] = useState(true)
     const [like, setLike] = useState(false)
-    const [subscribed, setSubscribed] = useState(false)
     const [comments, setComments] = useState([])
     const [loadingComments, setLoadingCommnets] = useState(true)
     const [comment, setComment] = useState('')
@@ -22,6 +21,7 @@ const CurrentVideo = () => {
     const [currentUser, setCurrentUser] = useState("")
     const [playlist, setPlaylist] = useState([])
     const [playlistLoading, setPlaylistLoading] = useState(false)
+    const [ChannelInfo, setChannelInfo] = useState('')
 
     const { videoId } = useParams();
 
@@ -47,35 +47,33 @@ const CurrentVideo = () => {
 
     }
 
-    const getSubscriberCount = async (username) => {
-        // console.log(username);
-        const url = `/api/users/c/${username}`
-        const response = await axios.get(url)
-            .then((res) => {
-                setSubs(res.data.data)
-            })
-    }
-
     const handleLike = async () => {
         const url = `/api/likes/toggle/v/${videoId}`
         const response = await axios.post(url)
-            .then((res) => {
-                setLike(res.data.data.isLiked);
-            })
-            .catch((err) => console.log(err))
+        getvideoIsLiked()
     }
 
-    const handleSubscriber = async () => {
+    const getvideoIsLiked = async() => {
+        const url = `/api/likes/isLiked/v/${videoId}`
+        const response = await axios.get(url)
+        setLike(response.data.data? true:false)
+    }
+
+    const ToggleSubscriber = async () => {
         const resp = await axios.get(`/api/videos/${videoId}`)
         const url1 = `/api/subscriptions/c/${resp.data.data.owner}`
         const response = await axios.post(url1)
-        setSubscribed(response.data.data.subscribed)
-        const url = `/api/users/u/${resp.data.data.owner}`
-        const respo = await axios.get(url)
-            .then((res) => {
-                // console.log(res.data.data.user.username);
-                getSubscriberCount(res.data.data.user.username)
-            })
+        getChannelInfo()
+    }
+
+    const getChannelInfo = async() => {
+        const url = `/api/videos/${videoId}`
+        const response = await axios.get(url)
+        const url1 = `/api/users/u/${response.data.data.owner}`
+        const resp = await axios.get(url1)
+        const url2 = `/api/users/c/${resp.data.data.user.username}`
+        const res = await axios.get(url2)
+        setChannelInfo(res.data.data)
     }
 
     const getAllComments = async () => {
@@ -139,12 +137,12 @@ const CurrentVideo = () => {
     }
     
     useEffect(() => {
+        getvideoIsLiked()
+        getChannelInfo()
         getcurrentUserPlaylist()
         addVideoToHistory()
         getVideoByVideoId()
         getAllComments()
-        handleSubscriber()
-        handleLike(videoId)
         getCurrentUser()
     }, [])
 
@@ -168,6 +166,7 @@ const CurrentVideo = () => {
                     </div>
                 </div>
             }
+
             <div className='w-full mt-10 overflow-y-scroll'>
                 <video
                     src={video.videoFile}
@@ -185,14 +184,18 @@ const CurrentVideo = () => {
                         <img src={user.avatar} className='h-12 rounded-full aspect-square' />
                         <div className='text-white gap-10 max-md:gap-2'>
                             <h1 className='text-lg'>{user.fullName}</h1>
-                            <p>{subs.subscribersCount}</p>
+                            <p>{ChannelInfo.subscribersCount}</p>
                         </div>
+
+                        {/* subscribe section */}
                         <button
-                            onClick={handleSubscriber}
-                            className={`${subscribed ? "hover:bg-gray-500 bg-red-600" : "bg-gray-500 hover:bg-red-600"}  px-8 py-4 rounded-full  text-xl text-white`}>
-                            {subscribed ? "subscribed" : "subscribe"}
+                            onClick={ToggleSubscriber}
+                            className={`${ChannelInfo.isSubscribed ? "hover:bg-gray-500 bg-red-600" : "bg-gray-500 hover:bg-red-600"}  px-8 py-4 rounded-full  text-xl text-white`}>
+                            {ChannelInfo.isSubscribed ? "subscribed" : "subscribe"}
                         </button>
                     </div>
+
+                    {/* playlist section */}
                     <button 
                     onClick={() => setPlaylistLoading(true)}
                     className='hover:bg-black text-white text-lg px-5 py-2 rounded-full bg-transparent border-none outline-none'>
@@ -231,7 +234,7 @@ const CurrentVideo = () => {
                         </div> : ""
                     }
                     
-
+                    {/* like section */}
                     <button className="" onClick={handleLike}>
                         {like ? <BiSolidLike size={30} color='white' /> : <BiLike color='white' size={30} />}
                     </button>
@@ -265,7 +268,13 @@ const CurrentVideo = () => {
                             {
                                 comments.map((com) => {
                                     return (
-                                        <CommentCard key={com._id} ownerId={com.owner} content={com.content} createdAt={com.createdAt} id={com._id} />
+                                        <CommentCard 
+                                        key={com._id} 
+                                        ownerId={com.owner} 
+                                        content={com.content} 
+                                        createdAt={com.createdAt} 
+                                        id={com._id} 
+                                        />
                                     )
                                 })
                             }
