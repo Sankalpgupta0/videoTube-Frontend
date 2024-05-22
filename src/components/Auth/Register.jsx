@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import Loader from './Loader'
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // TODO: show error message from backend into frontend
 
@@ -16,53 +17,69 @@ const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [avatar, setAvatar] = useState('')
     const [coverImage, setCoverImage] = useState('')
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(null)
+    const [WhichMessage, setWhichMessage] = useState(false)
     // Show or hide password handler
     const [showPassword, setShowPassword] = useState(false)
     const [showConfPassword, setShowConfPassword] = useState(false)
     
     const  navigate = useNavigate();
 
+    const notifyError = ({message}) => {
+        console.log(message);
+        toast.error(message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(password  === confirmPassword){
-            
-        setLoading(true)
-        
-        try {
-            const formData = new FormData();
-            formData.append('fullName', fullname);
-            formData.append('username', username);
-            formData.append('password', password);
-            formData.append('confirmPassword', confirmPassword);
-            formData.append('email', email);
-            formData.append('avatar', avatar);
-            formData.append('coverImage', coverImage);
-    
-            const response = await axios.post('/api/users/register', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
+            if(WhichMessage){
+                notifyError({message:"Please Wait You will be redirected to login page once signup is successfully"})
             }
-            });
+            try {
+                const formData = new FormData();
+                formData.append('fullName', fullname);
+                formData.append('username', username);
+                formData.append('password', password);
+                formData.append('confirmPassword', confirmPassword);
+                formData.append('email', email);
+                formData.append('avatar', avatar);
+                formData.append('coverImage', coverImage);
+                
+                const response = await axios.post('/api/users/register', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then(res => {
+                    setWhichMessage(true)
+                    //NOTE: make it  so that the user is redirected to dashboard after registration
+                    navigate('/login')
+                })
+                .catch(err => {
+                    notifyError({message: err.response.data.statusCode.message})
+                    setWhichMessage(true)
+                })
             // console.log('Server response:', response?.data);
-            setLoading(false)
-            //NOTE: make it  so that the user is redirected to dashboard after registration
-            response.then(navigate('/login'))
             } catch (error) {
-                setLoading(false)
+                setWhichMessage(false)
         }
     } else{
-        alert("pasword do not match")
+        notifyError({message:"passwords do not match"})
     }
     };
 
 
-    if(loading){
-        return <Loader from="Register" to="Login"/>;
-    }
-
     return (
+        <>
     <form className='w-screen h-screen flex justify-center items-center loginBg ' onSubmit={handleSubmit}>
         <div className=' w-3/4 max-md:h-full max-lg:w-full h-4/5 bg-[#11161f]/80 md:rounded-2xl px-10 shadow-2xl shadow-gray-600'>
             <h1 className='text-center text-white'>*This is a testing version. application is still under process some of the features might not work </h1>
@@ -184,6 +201,20 @@ const Register = () => {
             <p className='text-gray-400'>All <span className='text-red-500'>*</span>  fields are required.</p>
         </div>
     </form>
+        <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition: Slide
+        />
+    </>
     )
 }
 

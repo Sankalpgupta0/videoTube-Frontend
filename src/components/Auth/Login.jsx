@@ -5,6 +5,8 @@ import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import Loader from './Loader';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const [usernameOrEmail, setUsernameOrEmail] = useState('')
@@ -12,8 +14,6 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [toastMessage, setToastMessage] = useState("")
-
     const navigate = useNavigate()
 
     // function setCookie(name, value, days, path, domain, secure, sameSite) {
@@ -41,6 +41,31 @@ const Login = () => {
 
     //     document.cookie = cookie;
     // }
+    const notifyError = ({message}) => {
+        toast.error(message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
+    };
+    const notifyLogin = ({message}) => {
+        console.log(message);
+        toast.success(message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
+    };
 
     useEffect(() => {
         if (usernameOrEmail.includes('@')) {
@@ -69,7 +94,6 @@ const Login = () => {
 
         axios.post(url, data)
             .then((res) => {
-                alert("login successfully")
                 // ways to set cookies from frontend
                 /* 1. Using the browser's built-in functionality */
                 // document.cookie =  `accessToken : ${res.data.data.accessToken}`;
@@ -80,11 +104,13 @@ const Login = () => {
                 // setCookie("refreshToken", res.data.data.refreshToken,import.meta.env.VITE_REFRESH_TOKEN_EXPIRY);
 
                 navigate('/home');
+                notifyLogin({message:res.data.message})
                 setLoading(false);
             })
             .catch((err) => {
-                alert("error occurred try again");
+                console.log(err.response.data.statusCode);
                 setLoading(false)
+                notifyError({message:err.response.data.statusCode.message})
             })
         setLoading(false);
 
@@ -95,6 +121,7 @@ const Login = () => {
     }
 
     return (
+        <>
         <div className='w-screen h-screen flex items-center justify-center loginBg'>
             <form
                 method='POST'
@@ -138,8 +165,21 @@ const Login = () => {
                 </div>
                 <p className='text-gray-400'>All <span className='text-red-500'>*</span> fields are required.</p>
             </form>
-
         </div>
+        <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition: Slide
+        />
+        </>
     )
 }
 
