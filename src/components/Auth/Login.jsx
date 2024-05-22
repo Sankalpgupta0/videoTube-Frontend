@@ -8,7 +8,7 @@ import Loader from './Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { login } from '../../store+slice/auth.Slice.js'
+import { login } from '../../store+slice/auth.slice.js'
 
 const Login = () => {
     const [usernameOrEmail, setUsernameOrEmail] = useState('')

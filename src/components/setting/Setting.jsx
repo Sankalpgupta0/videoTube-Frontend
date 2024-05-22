@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { logout } from '../../store+slice/auth.Slice.js';
+import { logout } from '../../store+slice/auth.slice.js';
 import { useDispatch } from 'react-redux';
 
 const Setting = () => {

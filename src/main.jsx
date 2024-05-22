@@ -19,70 +19,101 @@ import ViewPlaylist from './components/playlist/ViewPlaylist.jsx'
 import AllPlaylist from './components/playlist/AllPlaylist.jsx'
 import Chat from './components/community/Chat.jsx'
 import Sidebar from './components/Home/Sidebar.jsx'
+import AuthLayout from './components/Auth/AuthLayout.jsx'
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <App />,
-    children: [
+    path:'/',
+    element:<App/>,
+    children:[
       {
-        path: '/',
-        element: <Register />
+        path:'/',
+        element:<Register/>
       },
       {
-        path: '/login',
-        element: <Login />
+        path:'/login',
+        element:<Login/>
       },
       {
-        path: '/sidebar',
-        element: <Sidebar />
+        path:'/sidebar',
+        element:<Sidebar/>
       },
       {
-        path: '/home',
-        element: <Home />,
+        path:'/home',
+        element: <AuthLayout authentication>
+          {" "}
+          <Home />
+        </AuthLayout>,
         children: [
           {
             path: '/home',
-            element: <GetAllVideos />,
+            element:<AuthLayout authentication>
+            {" "}
+            <GetAllVideos/>
+          </AuthLayout>,
           },
           {
             path: '/home/:videoId',
-            element: <CurrentVideo />
+            element:<AuthLayout authentication>
+            {" "}
+            <CurrentVideo/>
+          </AuthLayout>,
           },
           {
             path: '/home/yourchannel',
-            element: <YourChannel />
+            element:<AuthLayout authentication>
+            {" "}
+            <YourChannel/>
+          </AuthLayout>,
           },
           {
-            path: '/home/setting',
-            element: <Setting />
+            path:'/home/setting',
+            element:<AuthLayout authentication>
+            {" "}
+            <Setting/>
+          </AuthLayout>,
           },
           {
-            path: '/home/history',
-            element: <History />
+            path:'/home/history',
+            element:<AuthLayout authentication>
+            {" "}
+            <History/>
+          </AuthLayout>,
           },
           {
-            path: '/home/community',
-            element: <Chat />
+            path:'/home/community',
+            element:<AuthLayout authentication>
+            {" "}
+            <Chat/>
+          </AuthLayout>,
           },
           {
-            path: '/home/playlist',
-            element: <Playlist />,
-            children: [
+            path:'/home/playlist',
+            element:<AuthLayout authentication>
+            {" "}
+            <Playlist/>
+          </AuthLayout>,
+            children:[
               {
-                path: '/home/playlist',
-                element: <AllPlaylist />,
+                path:'/home/playlist',
+                element:<AuthLayout authentication>
+            {" "}
+            <AllPlaylist/>
+          </AuthLayout>,
               },
               {
-                path: '/home/playlist/:playlistId',
-                element: <ViewPlaylist />
+                path:'/home/playlist/:playlistId',
+                element:<AuthLayout authentication>
+            {" "}
+            <ViewPlaylist/>
+          </AuthLayout>,
               }
             ]
 
           },
         ]
       },
-
+      
     ]
   }
 ])
