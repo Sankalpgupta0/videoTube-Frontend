@@ -22,28 +22,28 @@ import Sidebar from './components/Home/Sidebar.jsx'
 
 const router = createBrowserRouter([
   {
-    path:'/',
-    element:<App/>,
-    children:[
+    path: '/',
+    element: <App />,
+    children: [
       {
-        path:'/',
-        element:<Register/>
+        path: '/',
+        element: <Register />
       },
       {
-        path:'/login',
-        element:<Login/>
+        path: '/login',
+        element: <Login />
       },
       {
-        path:'/sidebar',
-        element:<Sidebar/>
+        path: '/sidebar',
+        element: <Sidebar />
       },
       {
-        path:'/home',
+        path: '/home',
         element: <Home />,
         children: [
           {
             path: '/home',
-            element: <GetAllVideos/>,
+            element: <GetAllVideos />,
           },
           {
             path: '/home/:videoId',
@@ -54,35 +54,35 @@ const router = createBrowserRouter([
             element: <YourChannel />
           },
           {
-            path:'/home/setting',
-            element:<Setting/>
+            path: '/home/setting',
+            element: <Setting />
           },
           {
-            path:'/home/history',
-            element:<History/>
+            path: '/home/history',
+            element: <History />
           },
           {
-            path:'/home/community',
-            element:<Chat/>
+            path: '/home/community',
+            element: <Chat />
           },
           {
-            path:'/home/playlist',
-            element:<Playlist/>,
-            children:[
+            path: '/home/playlist',
+            element: <Playlist />,
+            children: [
               {
-                path:'/home/playlist',
-                element:<AllPlaylist/>,
+                path: '/home/playlist',
+                element: <AllPlaylist />,
               },
               {
-                path:'/home/playlist/:playlistId',
-                element: <ViewPlaylist/>
+                path: '/home/playlist/:playlistId',
+                element: <ViewPlaylist />
               }
             ]
 
           },
         ]
       },
-      
+
     ]
   }
 ])

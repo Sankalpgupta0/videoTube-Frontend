@@ -5,38 +5,38 @@ import { BiLike } from "react-icons/bi";
 // to format createdAt
 import moment from 'moment'
 
-const CommentCard = ({ownerId, content, createdAt, id}) => {
+const CommentCard = ({ ownerId, content, createdAt, id }) => {
 
     const [user, setUser] = useState([]);
     const [like, setLike] = useState(false);
 
-    const getUserByUserId = async(userId) => {
+    const getUserByUserId = async (userId) => {
         const url = `/api/users/u/${userId}`
         const response = await axios.get(url)
-        .then((res) => {
-            setUser(res.data.data.user)
-            // console.log(res.data.data.user);
-        })
+            .then((res) => {
+                setUser(res.data.data.user)
+                // console.log(res.data.data.user);
+            })
     }
-    const handleLike = async() => {
+    const handleLike = async () => {
         const url = `/api/likes/toggle/c/${id}`
         const response = await axios.post(url)
         getCommentIsLiked()
     }
 
 
-    const getCommentIsLiked = async() => {
+    const getCommentIsLiked = async () => {
         const url = `/api/likes/isLiked/c/${id}`
         const response = await axios.get(url)
-        setLike(response.data.data? true:false)
+        setLike(response.data.data ? true : false)
     }
     useEffect(() => {
         getCommentIsLiked()
-    },[])
+    }, [])
 
     useEffect(() => {
         getUserByUserId(ownerId);
-    },[ownerId])
+    }, [ownerId])
 
     return (
         <div className='my-5 flex gap-5'>
@@ -47,9 +47,9 @@ const CommentCard = ({ownerId, content, createdAt, id}) => {
                 <div className='text-gray-500 flex gap-10'>
                     <p>Commented at: {moment(createdAt).format('MMMM Do YYYY, h:mm:ss a')}</p>
                     <button onClick={handleLike}>
-                        {like? <BiSolidLike color='white' size={24}/> : <BiLike color='white' size={24}/>}
+                        {like ? <BiSolidLike color='white' size={24} /> : <BiLike color='white' size={24} />}
                     </button>
-                </div>      
+                </div>
             </div>
         </div>
     )

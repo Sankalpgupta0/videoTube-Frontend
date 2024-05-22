@@ -32,13 +32,13 @@ const YourChannel = () => {
         <>
             <div className='w-full h-[100vh] overflow-y-scroll'>
                 <Navbar />
-                    {
-                        options == 'uploads' ?
-                            (<div className='grid grid-cols-4 max-lg:grid-cols-2 max-md:grid-cols-1 gap-5 p-2 w-full h-[100vh] overflow-y-scroll'>
-                                {
-                                    uploadedVideos.length == 0? <div className='text-centre text-nowrap text-gray-400 text-xl '>
-                                        You have  no videos yet! Start uploading by clicking on the "Upload" button in the navbar.
-                                    </div> : 
+                {
+                    options == 'uploads' ?
+                        (<div className='grid grid-cols-4 max-lg:grid-cols-2 max-md:grid-cols-1 gap-5 p-2 w-full h-[100vh] overflow-y-scroll'>
+                            {
+                                uploadedVideos.length == 0 ? <div className='text-centre text-nowrap text-gray-400 text-xl '>
+                                    You have  no videos yet! Start uploading by clicking on the "Upload" button in the navbar.
+                                </div> :
                                     uploadedVideos.map((video) => {
                                         return (
                                             <VideoCard
@@ -52,14 +52,14 @@ const YourChannel = () => {
                                             />
                                         )
                                     })
-                                }
-                                
-                                
-                            </div>) : (<div className='grid grid-cols-4 max-lg:grid-cols-2 max-md:grid-cols-1 gap-5 p-2 w-full h-[100vh] overflow-y-scroll'>
-                                {
-                                    likedVideos.length == 0?<div className='text-centre text-nowrap text-gray-400 text-xl '>
+                            }
+
+
+                        </div>) : (<div className='grid grid-cols-4 max-lg:grid-cols-2 max-md:grid-cols-1 gap-5 p-2 w-full h-[100vh] overflow-y-scroll'>
+                            {
+                                likedVideos.length == 0 ? <div className='text-centre text-nowrap text-gray-400 text-xl '>
                                     No liked Videos
-                                </div>:
+                                </div> :
                                     likedVideos.map((video) => {
                                         return (
                                             <VideoCard
@@ -73,10 +73,10 @@ const YourChannel = () => {
                                             />
                                         )
                                     })
-                                }
-                            </div>)
-                    }
-                </div>
+                            }
+                        </div>)
+                }
+            </div>
         </>
     )
 }

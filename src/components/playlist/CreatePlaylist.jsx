@@ -6,7 +6,7 @@ const CreatePlaylist = () => {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
 
-    const createPlaylist = async() => {
+    const createPlaylist = async () => {
         setDescription("");
         setTitle("");
         const url = '/api/playlist'
@@ -19,7 +19,7 @@ const CreatePlaylist = () => {
     }
 
     return (
-        
+
         <AlertDialog.Root>
             <AlertDialog.Trigger asChild>
                 <button className="hover:bg-black px-5 py-2 rounded-full border-none outline-none">
@@ -34,23 +34,23 @@ const CreatePlaylist = () => {
                     </AlertDialog.Title>
                     <div className='flex flex-col w-full max-md:w-full '>
                         <p className='text-sm  pl-5'>Title<span className='text-red-500'>*</span></p>
-                        <input 
-                        className='h-10 w-full max-md:h-8 rounded-md outline-none border-none pl-5'
-                        type="text" 
-                        value={title} 
-                        onChange={(e) => setTitle(e.target.value)}
-                        placeholder='Enter Title...'
+                        <input
+                            className='h-10 w-full max-md:h-8 rounded-md outline-none border-none pl-5'
+                            type="text"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            placeholder='Enter Title...'
                         />
                     </div>
 
                     <div className='flex flex-col w-full max-md:w-full '>
                         <p className='text-sm  pl-5'>Description<span className='text-red-500'>*</span></p>
-                        <input 
-                        className='h-10 max-md:h-8 w-full rounded-md outline-none border-none pl-5'
-                        type="text" 
-                        value={description} 
-                        onChange={(e) => setDescription(e.target.value)}
-                        placeholder='Enter Description...'
+                        <input
+                            className='h-10 max-md:h-8 w-full rounded-md outline-none border-none pl-5'
+                            type="text"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            placeholder='Enter Description...'
                         />
                     </div>
 
@@ -61,9 +61,9 @@ const CreatePlaylist = () => {
                             </button>
                         </AlertDialog.Cancel>
                         <AlertDialog.Action asChild>
-                            <button 
-                            onClick={createPlaylist}
-                            className="text-red11 bg-red4 hover:bg-red5 focus:shadow-red7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none outline-none focus:shadow-[0_0_0_2px]">
+                            <button
+                                onClick={createPlaylist}
+                                className="text-red11 bg-red4 hover:bg-red5 focus:shadow-red7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none outline-none focus:shadow-[0_0_0_2px]">
                                 create
                             </button>
                         </AlertDialog.Action>

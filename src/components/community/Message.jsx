@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-const Message = ({owner, content}) => {
+const Message = ({ owner, content }) => {
     const [currentUser, setCurrentUser] = useState("")
 
-    const getcurrentUser = async() => {
+    const getcurrentUser = async () => {
         const url = '/api/users/current-user'
         const response = await axios.get(url)
         console.log(response.data.data);
@@ -12,10 +12,10 @@ const Message = ({owner, content}) => {
     }
     useEffect(() => {
         getcurrentUser()
-    },[])
+    }, [])
 
     return (
-        <div className= {`w-full flex ${currentUser._id != owner ? "flex-row-reverse" : "flex-row"}` }>
+        <div className={`w-full flex ${currentUser._id != owner ? "flex-row-reverse" : "flex-row"}`}>
             <div className='w-1/2 max-md:hidden'>
 
             </div>
@@ -24,7 +24,7 @@ const Message = ({owner, content}) => {
                     {content}
                 </h1>
                 <div>
-                    
+
                 </div>
             </div>
         </div>

@@ -53,10 +53,10 @@ const CurrentVideo = () => {
         getvideoIsLiked()
     }
 
-    const getvideoIsLiked = async() => {
+    const getvideoIsLiked = async () => {
         const url = `/api/likes/isLiked/v/${videoId}`
         const response = await axios.get(url)
-        setLike(response.data.data? true:false)
+        setLike(response.data.data ? true : false)
     }
 
     const ToggleSubscriber = async () => {
@@ -66,7 +66,7 @@ const CurrentVideo = () => {
         getChannelInfo()
     }
 
-    const getChannelInfo = async() => {
+    const getChannelInfo = async () => {
         const url = `/api/videos/${videoId}`
         const response = await axios.get(url)
         const url1 = `/api/users/u/${response.data.data.owner}`
@@ -104,7 +104,7 @@ const CurrentVideo = () => {
         const res = axios.patch(url)
     }
 
-    
+
     const addComment = async () => {
         if (comment.trim().length === 0) {
             alert("Please enter a comment berofe posting")
@@ -118,24 +118,24 @@ const CurrentVideo = () => {
         getAllComments();
         setComment("");
     }
-    
+
     const StartVideo = (e) => {
         const currentTime = localStorage.getItem(`${videoId}`) || 0;
         e.currentTarget.currentTime = currentTime;
     }
 
-    const getcurrentUserPlaylist = async() => {
+    const getcurrentUserPlaylist = async () => {
         const url = '/api/users/current-user'
         const response = await axios.get(url)
         // console.log(response.data.data);
         setCurrentUser(response.data.data)
-        
+
         const url2 = `/api/playlist/user/${response.data.data._id}`
         const response2 = await axios.get(url2)
         // console.log(response2.data.data);
         setPlaylist(response2.data.data)
     }
-    
+
     useEffect(() => {
         getvideoIsLiked()
         getChannelInfo()
@@ -196,34 +196,34 @@ const CurrentVideo = () => {
                     </div>
 
                     {/* playlist section */}
-                    <button 
-                    onClick={() => setPlaylistLoading(true)}
-                    className='hover:bg-black text-white text-lg px-5 py-2 rounded-full bg-transparent border-none outline-none'>
+                    <button
+                        onClick={() => setPlaylistLoading(true)}
+                        className='hover:bg-black text-white text-lg px-5 py-2 rounded-full bg-transparent border-none outline-none'>
                         Add video to playlist
                     </button>
 
                     {
-                        playlistLoading? <div className='max-md:w-full absolute top-1/4 h-fit w-1/3 bg-black'>
+                        playlistLoading ? <div className='max-md:w-full absolute top-1/4 h-fit w-1/3 bg-black'>
                             <div className='w-full h-full flex justify-center items-center flex-col '>
                                 {
                                     playlist.map((list, index) => {
                                         return <div className='flex justify-between gap-y-10 hover:bg-gray-800 px-5 py-2 rounded-xl'>
-                                                    <div className=''>
-                                                        <h1 className='text-white text-xl'>{list.name}</h1>
-                                                        <p className='text-xs  '>{list._id}</p>
-                                                    </div>
-                                                    <button 
-                                                    onClick={async() => {
-                                                        const url = `/api/playlist/add/${videoId}/${list._id}`
-                                                        axios.patch(url)
+                                            <div className=''>
+                                                <h1 className='text-white text-xl'>{list.name}</h1>
+                                                <p className='text-xs  '>{list._id}</p>
+                                            </div>
+                                            <button
+                                                onClick={async () => {
+                                                    const url = `/api/playlist/add/${videoId}/${list._id}`
+                                                    axios.patch(url)
                                                         .then(() => alert(`Video is added to ${list.name} playlist`))
                                                         .catch(() => alert(`video already exists in the playlist`))
-                                                        
-                                                    }}
-                                                    className='text-white p-5 rounded-2xl hover:bg-gray-500 '> 
-                                                        Add
-                                                    </button>
-                                            </div>
+
+                                                }}
+                                                className='text-white p-5 rounded-2xl hover:bg-gray-500 '>
+                                                Add
+                                            </button>
+                                        </div>
                                     })
                                 }
                                 <button className='bg-gray-800 hover:bg-black px-10 py-5 rounded-full text-white text-2xl my-5' onClick={() => setPlaylistLoading(false)}>
@@ -233,7 +233,7 @@ const CurrentVideo = () => {
 
                         </div> : ""
                     }
-                    
+
                     {/* like section */}
                     <button className="" onClick={handleLike}>
                         {like ? <BiSolidLike size={30} color='white' /> : <BiLike color='white' size={30} />}
@@ -268,12 +268,12 @@ const CurrentVideo = () => {
                             {
                                 comments.map((com) => {
                                     return (
-                                        <CommentCard 
-                                        key={com._id} 
-                                        ownerId={com.owner} 
-                                        content={com.content} 
-                                        createdAt={com.createdAt} 
-                                        id={com._id} 
+                                        <CommentCard
+                                            key={com._id}
+                                            ownerId={com.owner}
+                                            content={com.content}
+                                            createdAt={com.createdAt}
+                                            id={com._id}
                                         />
                                     )
                                 })

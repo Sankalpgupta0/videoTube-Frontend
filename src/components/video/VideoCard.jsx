@@ -3,36 +3,36 @@ import axios from 'axios'
 import { Link } from 'react-router-dom';
 import RevomeVideoFromPlaylist from '../playlist/RevomeVideoFromPlaylist.jsx';
 
-const VideoCard = ({src, title, description, userId, time, id, inPlaylist=false, playlistId=""}) => {
+const VideoCard = ({ src, title, description, userId, time, id, inPlaylist = false, playlistId = "" }) => {
     const [user, setUser] = useState([]);
-    const getUserByUserId = async(userId) => {
+    const getUserByUserId = async (userId) => {
         const url = `/api/users/u/${userId}`
         const response = await axios.get(url)
-        .then((res) => setUser(res.data.data.user))
+            .then((res) => setUser(res.data.data.user))
     }
 
     useEffect(() => {
         userId && getUserByUserId(userId);
-    },[userId])
+    }, [userId])
 
 
 
     return (
         <Link to={`/home/${id}`} className='w-full hover:bg-black cursor-pointer'>
             <div className='w-full h-fit  p-3 text-gray-300'>
-                <img src={src} alt={title} className=' aspect-video rounded-lg'/>
+                <img src={src} alt={title} className=' aspect-video rounded-lg' />
                 <div className='h-full flex items-center gap-5'>
-                    <img src={user.avatar} className='h-8 rounded-full aspect-square'/>
+                    <img src={user.avatar} className='h-8 rounded-full aspect-square' />
                     <div className='w-full'>
                         <h1 className=''>{title}</h1>
                         <p className='textOverflow'> {description}</p>
                         <div className='flex justify-between mt-2 w-full'>
-                            <p>BY: {user.fullName? `${user.fullName}` : "YOU" }</p>
-                            <p>{parseInt(time/60)}:{(time%60).toFixed(0)} min</p>
+                            <p>BY: {user.fullName ? `${user.fullName}` : "YOU"}</p>
+                            <p>{parseInt(time / 60)}:{(time % 60).toFixed(0)} min</p>
                         </div>
                     </div>
                     {
-                        inPlaylist && <RevomeVideoFromPlaylist videoId={id} playlistId={playlistId}/>
+                        inPlaylist && <RevomeVideoFromPlaylist videoId={id} playlistId={playlistId} />
                     }
                 </div>
             </div>

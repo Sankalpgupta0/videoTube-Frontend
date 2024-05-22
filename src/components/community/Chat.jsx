@@ -8,25 +8,25 @@ const Chat = () => {
 
     const getMessages = () => {
         axios.get('/api/tweets')
-        .then(res => setMessages(res.data.data.tweets))
+            .then(res => setMessages(res.data.data.tweets))
     }
     useEffect(() => {
         getMessages()
-    },[])
+    }, [])
     return (
         <div className='w-full h-[95vh] px-10 ' >
             <div className='h-4/5 w-full overflow-y-scroll'>
                 {
                     messages.map((message, index) => (
-                        <Message 
-                        key={index} 
-                        owner={message.owner} 
-                        content={message.content} 
+                        <Message
+                            key={index}
+                            owner={message.owner}
+                            content={message.content}
                         />
                     ))
                 }
             </div>
-            <Input/>
+            <Input />
         </div>
     )
 }

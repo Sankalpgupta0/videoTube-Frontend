@@ -7,7 +7,7 @@ const AllPlaylist = () => {
     const [currentUser, setCurrentUser] = useState("")
     const [playlist, setPlaylist] = useState([])
 
-    const getcurrentUserPlaylist = async() => {
+    const getcurrentUserPlaylist = async () => {
         const url = '/api/users/current-user'
         const response = await axios.get(url)
         // console.log(response.data.data);
@@ -21,7 +21,7 @@ const AllPlaylist = () => {
 
     useEffect(() => {
         getcurrentUserPlaylist()
-    },[])
+    }, [])
 
     return (
         <div className='w-full h-fit min-h-screen sticky'>
