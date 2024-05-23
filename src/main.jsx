@@ -28,83 +28,88 @@ const router = createBrowserRouter([
     children:[
       {
         path:'/',
-        element:<Register/>
+        element:<AuthLayout >
+        <Register />
+      </AuthLayout>,
       },
       {
         path:'/login',
-        element:<Login/>
+        element:<AuthLayout >
+        <Login />
+      </AuthLayout>,
       },
       {
         path:'/sidebar',
-        element:<Sidebar/>
+        element:<AuthLayout >
+        <Sidebar />
+      </AuthLayout>,
       },
       {
         path:'/home',
-        element: <AuthLayout authentication>
-          {" "}
+        element: <AuthLayout >
           <Home />
         </AuthLayout>,
         children: [
           {
             path: '/home',
-            element:<AuthLayout authentication>
-            {" "}
+            element:<AuthLayout >
+
             <GetAllVideos/>
           </AuthLayout>,
           },
           {
             path: '/home/:videoId',
-            element:<AuthLayout authentication>
-            {" "}
+            element:<AuthLayout >
+
             <CurrentVideo/>
           </AuthLayout>,
           },
           {
             path: '/home/yourchannel',
-            element:<AuthLayout authentication>
-            {" "}
+            element:<AuthLayout >
+
             <YourChannel/>
           </AuthLayout>,
           },
           {
             path:'/home/setting',
-            element:<AuthLayout authentication>
-            {" "}
+            element:<AuthLayout >
+
             <Setting/>
           </AuthLayout>,
           },
           {
             path:'/home/history',
-            element:<AuthLayout authentication>
-            {" "}
+            element:<AuthLayout >
+
             <History/>
           </AuthLayout>,
           },
           {
             path:'/home/community',
-            element:<AuthLayout authentication>
-            {" "}
+            element:<AuthLayout >
+
             <Chat/>
           </AuthLayout>,
           },
           {
             path:'/home/playlist',
-            element:<AuthLayout authentication>
-            {" "}
+            element:<AuthLayout >
+
             <Playlist/>
           </AuthLayout>,
             children:[
               {
                 path:'/home/playlist',
-                element:<AuthLayout authentication>
-            {" "}
+                element:<AuthLayout >
+
             <AllPlaylist/>
           </AuthLayout>,
               },
               {
                 path:'/home/playlist/:playlistId',
-                element:<AuthLayout authentication>
-            {" "}
+                element:<AuthLayout >
+
             <ViewPlaylist/>
           </AuthLayout>,
               }

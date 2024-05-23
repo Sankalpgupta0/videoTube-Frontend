@@ -2,21 +2,22 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-export default function AuthLayout({ children, authentication = true }) {
+export default function AuthLayout({ children }) {
 
     const navigate = useNavigate()
     const [loader, setLoader] = useState(true)
-    const authStatus = useSelector(state => state.AuthReducer.status)
-
-    useEffect(() => {
-
-        if (authentication && authStatus !== authentication) {
+    let authStatus = localStorage.getItem("isLogin")
+    const navigationFunction = () => {
+        if (authStatus === "true") {
+            navigate("/home")
+        } else {
             navigate("/login")
-        } else if (!authentication && authStatus !== authentication) {
-            navigate("/")
         }
+    }
+    useEffect(() => {
+        navigationFunction()
         setLoader(false)
-    }, [authStatus, navigate, authentication])
+    }, [authStatus, navigate])
 
     return loader ? <h1>Loading...</h1> : <>{children}</>
 }

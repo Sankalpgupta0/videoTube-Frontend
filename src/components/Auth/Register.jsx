@@ -80,7 +80,7 @@ const Register = () => {
 
     return (
         <>
-            <form className='w-screen h-screen flex justify-center items-center loginBg ' onSubmit={handleSubmit}>
+            <form className='w-screen min-h-screen flex justify-center items-center loginBg ' onSubmit={handleSubmit}>
                 <div className=' w-3/4 max-md:h-full max-lg:w-full h-4/5 bg-[#11161f]/80 md:rounded-2xl px-10 shadow-2xl shadow-gray-600'>
                     <h1 className='text-center text-white'>*This is a testing version. application is still under process some of the features might not work </h1>
                     <p className='text-center text-xl text-white font-bold my-10 max-md:my-5'>Register</p>
