@@ -6,9 +6,9 @@ import { FaSearch } from "react-icons/fa";
 import { PiVideoLight } from "react-icons/pi";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { setSearch } from '../../store+slice/videoOptions.slice';
 
 const Navbar = () => {
-    const [search, setSearch] = useState('')
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const toggleSideBar = useSelector(state => state.sidebarReducer.open)
@@ -45,9 +45,7 @@ const Navbar = () => {
                         type="text"
                         placeholder='Search...'
                         className='h-[40px] w-full  px-5 border-none outline-none'
-
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
+                        onChange={(e) => dispatch(setSearch(e.target.value))}
                     />
                 </div>
                 <h1
