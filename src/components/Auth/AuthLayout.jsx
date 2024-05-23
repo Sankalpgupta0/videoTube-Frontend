@@ -9,7 +9,6 @@ export default function AuthLayout({ children }) {
     let authStatus = localStorage.getItem("isLogin")
     const navigationFunction = () => {
         if (authStatus === "true") {
-            navigate("/home")
         } else {
             navigate("/login")
         }
