@@ -19,5 +19,7 @@ Here's a video showcasing my work on both the backend and frontend:
 
 Video link : https://drive.google.com/file/d/1P25C1jKZeVhCUHD9bmF3lOXjmiP14tO7/view
 
+## *Before trying the Website* 
+### make sure backend is running at https://videotube-backend-akxz.onrender.com
 Deployed Link : https://videotube-sankalp.vercel.app/
 
