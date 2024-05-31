@@ -22,6 +22,7 @@ Video link : https://drive.google.com/file/d/1P25C1jKZeVhCUHD9bmF3lOXjmiP14tO7/v
 ## *Before trying the Website* 
 ### *Cold Start :* 
 I am using free service of render of after a period of inactivity render automatically spin down to conserve resources so the first request after a period of inactivity can take significantly longer, often 50 seconds or more, as the instance has to "wake up."
+To handle this problem i am using a Keep Alive Server Technique using UptimeRobot
 
 ### make sure backend is running at https://videotube-backend-akxz.onrender.com
 Deployed Link : https://videotube-sankalp.vercel.app/
