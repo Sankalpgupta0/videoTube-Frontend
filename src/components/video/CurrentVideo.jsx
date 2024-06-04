@@ -161,7 +161,7 @@ const CurrentVideo = () => {
 
                     </div>
                     <div className='flex justify-between gap-10 mx-10'>
-                        <EditVideo tit={video.title} descprit={video.description} />
+                        <EditVideo tit={video.title} descprit={video.description} thumb={video.thumbnail} />
                         <DeleteVideo />
                     </div>
                 </div>

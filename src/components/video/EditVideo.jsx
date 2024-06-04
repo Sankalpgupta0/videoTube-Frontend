@@ -3,22 +3,22 @@ import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-const EditVideo = ({ tit, descprit }) => {
+const EditVideo = ({ tit, descprit, thumb }) => {
     const [title, setTitle] = useState(tit || "");
     const [descprition, setDescription] = useState(descprit || "");
-    const [thumbnail, setThumbnail] = useState('');
+    const [thumbnail, setThumbnail] = useState(thumb || '');
 
     const { videoId } = useParams()
 
     const EditVideo = async () => {
         const formData = new FormData()
         formData.append("title", title);
-        formData.append('descprition', descprition);
+        formData.append('description', descprition);
         formData.append('thumbnail', thumbnail);
 
         const url = `/api/videos/${videoId}`
         try {
-            const res = await axios.patch(url, formData)
+            const res = axios.patch(url, formData)
             console.log(res);
         } catch (err) {
             console.log(err)
@@ -69,7 +69,7 @@ const EditVideo = ({ tit, descprit }) => {
                                 htmlFor="Thumbnail"
                                 className='h-10 max-md:h-8 w-full rounded-md outline-none border-none pl-5 text-gray-400 cursor-pointer hover:bg-gray-100'
                             >
-                                {thumbnail ? `${thumbnail.name}` : "Select Thumbnail for video"}
+                                {thumbnail ? `${thumbnail.slice(64)}` : "Select Thumbnail for video"}
                                 {/* Select Thumbnail for video */}
                             </label>
                             <input
@@ -77,7 +77,6 @@ const EditVideo = ({ tit, descprit }) => {
                                 className='hidden'
                                 type="file"
                                 accept='image/*'
-                                // value={thumbnail} 
                                 formEncType='multipart/form-data'
                                 onInput={(e) => {
                                     const x = e.target.files[0]

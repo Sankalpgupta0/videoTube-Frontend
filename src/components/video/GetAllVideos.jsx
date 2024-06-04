@@ -39,7 +39,7 @@ const GetAllVideos = () => {
             <div className='grid grid-cols-4 max-lg:grid-cols-2 max-md:grid-cols-1 gap-5 p-2 w-full h-[100vh] overflow-y-scroll'>
                 {search.length == 0 ?
                     videos.map((video) => {
-                        console.log(video.title);
+                        // console.log(video.title);
                         return (
                             <VideoCard
                                 key={video._id}
