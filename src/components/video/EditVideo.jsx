@@ -42,7 +42,7 @@ const EditVideo = ({ tit, descprit, thumb }) => {
                         className='flex flex-col gap-y-4'
                     >
                         <div className='flex flex-col w-full max-md:w-full '>
-                            <p className='text-sm  pl-5'>Title<span className='text-red-500'>*</span></p>
+                            <p className='text-sm  pl-5'>Title</p>
                             <input
                                 className='h-10 w-full max-md:h-8 rounded-md outline-none border-none pl-5'
                                 type="text"
@@ -64,7 +64,7 @@ const EditVideo = ({ tit, descprit, thumb }) => {
                         </div>
 
                         <div className='flex flex-col w-full max-md:w-full '>
-                            <p className='text-sm  pl-5'>Thumbnail<span className='text-red-500'>*</span></p>
+                            <p className='text-sm  pl-5'>Thumbnail</p>
                             <label
                                 htmlFor="Thumbnail"
                                 className='h-10 max-md:h-8 w-full rounded-md outline-none border-none pl-5 text-gray-400 cursor-pointer hover:bg-gray-100'
