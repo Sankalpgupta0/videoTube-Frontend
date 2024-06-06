@@ -67,6 +67,9 @@ const ViewPlaylist = () => {
 
     return (
         <>
+        {
+            console.log(videoDetails)
+        }
         <h1 className='text-white text-center font-bold text-xl'>Owner : {ownerDetails.username}</h1>
         <p className='text-gray-300 text-center'>Playlist-Name : {playlistName}</p>
         <div 
