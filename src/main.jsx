@@ -20,6 +20,7 @@ import AllPlaylist from './components/playlist/AllPlaylist.jsx'
 import Chat from './components/community/Chat.jsx'
 import Sidebar from './components/Home/Sidebar.jsx'
 import AuthLayout from './components/Auth/AuthLayout.jsx'
+import Channel from './components/channel/Channel.jsx'
 
 const router = createBrowserRouter([
   {
@@ -110,6 +111,10 @@ const router = createBrowserRouter([
             ]
 
           },
+          {
+            path : '/home/channel/:userId',
+            element: <Channel/>
+          }
         ]
       },
       

@@ -6,6 +6,7 @@ import { BiLike } from "react-icons/bi";
 import CommentCard from './CommentCard';
 import EditVideo from './EditVideo';
 import DeleteVideo from './DeleteVideo';
+import { useNavigate } from 'react-router-dom';
 
 const CurrentVideo = () => {
     const [video, setVideo] = useState({})
@@ -24,6 +25,7 @@ const CurrentVideo = () => {
     const [ChannelInfo, setChannelInfo] = useState('')
 
     const { videoId } = useParams();
+    const navigate = useNavigate()
 
     const getVideoByVideoId = async () => {
         setLoading(true)
@@ -181,8 +183,15 @@ const CurrentVideo = () => {
                 <p className='text-center text-gray-400'>{video.description}</p>
                 <div className='w-full flex justify-between px-10 max-md:flex-col items-center'>
                     <div className='flex gap-10 max-md:gap-2'>
-                        <img src={user.avatar} className='h-12 rounded-full aspect-square' />
-                        <div className='text-white gap-10 max-md:gap-2'>
+                        <img 
+                        src={user.avatar} 
+                        className='h-12 rounded-full aspect-square cursor-pointer' 
+                        onClick={() => navigate(`/home/channel/${user._id}`)}
+                        />
+                        <div 
+                        className='text-white gap-10 max-md:gap-2 cursor-pointer'
+                        onClick={() => navigate(`/home/channel/${user._id}`)}
+                        >
                             <h1 className='text-lg'>{user.fullName}</h1>
                             <p>{ChannelInfo.subscribersCount}</p>
                         </div>
@@ -203,8 +212,8 @@ const CurrentVideo = () => {
                     </button>
 
                     {
-                        playlistLoading ? <div className='max-md:w-full absolute top-1/4 h-fit w-1/3 bg-black'>
-                            <div className='w-full h-full flex justify-center items-center flex-col '>
+                        playlistLoading ? <div className='top-0 left-0 absolute z-10 h-screen w-screen flex justify-center items-center'>
+                            <div className=' w-fit h-fit bg-black flex justify-center items-center flex-col rounded-xl'>
                                 {
                                     playlist.map((list, index) => {
                                         return <div className='flex justify-between gap-y-10 hover:bg-gray-800 px-5 py-2 rounded-xl'>

@@ -107,7 +107,7 @@ const Register = () => {
                     </div>
                     <div className='flex max-md:flex-col gap-5 my-5'>
                         <div className='flex flex-col w-1/2 max-md:w-full'>
-                            <p className='text-sm text-[#D9E8FCB0] pl-5'>Avatar <span className='text-red-500'>*</span></p>
+                            <p className='text-sm text-[#D9E8FCB0] pl-5'>Avatar</p>
                             <label
                                 htmlFor="avatar"
                                 className=' rounded-md text-white bg-transparent hover:bg-[#ADC8EB24]  outline-none border-none ' >
