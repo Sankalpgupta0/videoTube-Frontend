@@ -67,9 +67,6 @@ const ViewPlaylist = () => {
 
     return (
         <>
-        {
-            console.log(videoDetails)
-        }
         <h1 className='text-white text-center font-bold text-xl'>Owner : {ownerDetails.username}</h1>
         <p className='text-gray-300 text-center'>Playlist-Name : {playlistName}</p>
         <div 
@@ -88,7 +85,6 @@ const ViewPlaylist = () => {
                 videoDetails.length == 0 ? <h1 className='text-2xl text-white text-nowrap text-center'>There are no videos in this playlist</h1> :
                     loading ? <h1 className='text-white text-2xl'>Loading</h1> :
                         videoDetails.map((video, index) => (
-                            index < videoDetails.length / 2 ?
                                 (
                                     <VideoCard
                                         key={index} 
@@ -103,7 +99,6 @@ const ViewPlaylist = () => {
                                         isOwner={ownerDetails._id == currentUser._id? true : false}
                                     />
                                 )
-                                : <div> </div>
                         ))
             }
         </div>
