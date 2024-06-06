@@ -100,7 +100,7 @@ const ViewPlaylist = () => {
                                         isOwner={ownerDetails._id == currentUser._id? true : false}
                                     />
                                 )
-                                : <div key={index}> </div>
+                                : <div> </div>
                         ))
             }
         </div>
