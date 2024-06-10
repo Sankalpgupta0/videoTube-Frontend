@@ -71,31 +71,31 @@ const Sidebar = () => {
                 </NavLink>
 
                 <NavLink
-                    className=" ml-5 px-2 py-5 hover:text-white"
+                    className={ ({isActive}) => isActive? "ml-5 px-2 py-5 font-extrabold text-white" : "ml-5 px-2 py-5 hover:text-white"}
                     to={"/home/yourchannel"}>
                     Your channel
                 </NavLink>
 
                 <NavLink
-                    className=" ml-5 px-2 py-5 hover:text-white"
+                    className={ ({isActive}) => isActive? "ml-5 px-2 py-5 font-extrabold text-white" : "ml-5 px-2 py-5 hover:text-white"}
                     to={"/home/history"}>
                     History
                 </NavLink>
 
                 <NavLink
-                    className=" ml-5 px-2 py-5 hover:text-white"
+                    className={ ({isActive}) => isActive? "ml-5 px-2 py-5 font-extrabold text-white" : "ml-5 px-2 py-5 hover:text-white"}
                     to={"/home/community"}>
                     Community
                 </NavLink>
 
                 <NavLink
-                    className=" ml-5 px-2 py-5 hover:text-white"
+                    className={ ({isActive}) => isActive? "ml-5 px-2 py-5 font-extrabold text-white" : "ml-5 px-2 py-5 hover:text-white"}
                     to={"/home/playlist"}>
                     Your Playlist
                 </NavLink>
 
                 <NavLink
-                    className=" ml-5 px-2 py-5 hover:text-white"
+                    className={ ({isActive}) => isActive? "ml-5 px-2 py-5 font-extrabold text-white" : "ml-5 px-2 py-5 hover:text-white"}
                     to={"/home/Setting"}>
                     Setting
                 </NavLink>
