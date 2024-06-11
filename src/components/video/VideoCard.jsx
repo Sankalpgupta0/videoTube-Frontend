@@ -6,18 +6,36 @@ import { useNavigate } from 'react-router-dom';
 
 const VideoCard = ({ src, title, description, userId, time, id, inPlaylist = false, playlistId = "", isOwner = false }) => {
     const [user, setUser] = useState([]);
+    const [currentUser, setCurrentUser] = useState('')
     const getUserByUserId = async (userId) => {
         const url = `/api/users/u/${userId}`
         const response = await axios.get(url)
             .then((res) => setUser(res.data.data.user))
     }
 
+    const getCurrentUser = async () => {
+        const url = `/api/users/current-user`
+        const res = await axios.get(url)
+        // console.log(res.data.data);
+        setCurrentUser(res.data.data);
+    }
+
     useEffect(() => {
+        getCurrentUser()
         userId && getUserByUserId(userId);
     }, [userId])
 
     const navigate = useNavigate()
 
+
+    const handleChannelNavigation = async () => {
+        if(currentUser._id == user._id){
+            navigate('/home/yourchannel')
+        } else{
+            navigate(`/home/channel/${user._id}`)
+        }
+
+    }
     return (
         <div className='w-full hover:bg-black cursor-pointer'>
             <div className='w-full h-fit  p-3 text-gray-300'>
@@ -31,13 +49,13 @@ const VideoCard = ({ src, title, description, userId, time, id, inPlaylist = fal
                     <img 
                     src={user.avatar} 
                     className='h-8 rounded-full aspect-square z-10' 
-                    onClick={() => navigate(`/home/channel/${user._id}`)}
+                    onClick={handleChannelNavigation}
                     />
                     <div className='w-full'>
                         <h1 className=''>{title}</h1>
                         <p className='textOverflow'> {description}</p>
                         <div className='flex justify-between mt-2 w-full'>
-                            <p onClick={() => navigate(`/home/channel/${user._id}`)}>BY: {user.fullName ? `${user.fullName}` : "YOU"}</p>
+                            <p onClick={handleChannelNavigation}>BY: {user.fullName ? `${user.fullName}` : "YOU"}</p>
                             <p>{parseInt(time / 60)}:{(time % 60).toFixed(0)} min</p>
                         </div>
                     </div>

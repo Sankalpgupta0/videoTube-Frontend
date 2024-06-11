@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { logout } from '../../store+slice/auth.slice.js';
 import { useDispatch } from 'react-redux';
+import UpdateInfo from './UpdateInfo.jsx';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Setting = () => {
     const [select, setSelect] = useState("dark");
@@ -19,9 +21,23 @@ const Setting = () => {
             })
     }
 
+    const notifyError = ({ message }) => {
+        toast.error("Invalid old password", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+    };
+
     return (
         <div className='w-full h-[100vh] py-10 flex justify-center items-center ' >
-            <div className='w-2/3 h-2/3 bg-black/90 max-md:w-full rounded-2xl px-5'>
+            <div className='w-2/3 h-2/3 bg-black/90 max-md:w-full rounded-2xl px-5 flex flex-col'>
+                <UpdateInfo toast={notifyError}/>
                 <div className="theme flex justify-between px-10 text-white my-10  text-xl items-center">
                     <p>Theme</p>
                     <select
@@ -56,7 +72,20 @@ const Setting = () => {
                 </div>
 
             </div>
-
+            <ToastContainer
+                className={`my-[60px]`}
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={true}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+                transition:Slide
+            />
         </div>
     )
 }

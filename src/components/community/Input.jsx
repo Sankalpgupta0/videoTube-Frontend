@@ -32,7 +32,7 @@ const Input = () => {
                 />
                 <button
                     onClick={handleTweets}
-                    className='w-[10%] h-[50px] bg-green-500 text-center hover:bg-green-700 text-white text-xl font-extrabold'>
+                    className='w-[10%] rounded-tr-2xl rounded-br-2xl h-[50px] bg-green-500 text-center hover:bg-green-700 text-white text-xl font-extrabold'>
                     Post
                 </button>
             </div>
