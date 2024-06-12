@@ -8,6 +8,13 @@ import EditVideo from './EditVideo';
 import DeleteVideo from './DeleteVideo';
 import { useNavigate } from 'react-router-dom';
 
+const Skeleton = () => {
+    return(
+        <div className='w-full aspect-video bg-black my-20 max-h-screen VideoSkeleton'>
+
+        </div>
+    )
+}
 const CurrentVideo = () => {
     const [video, setVideo] = useState({})
     const [user, setUser] = useState([]);
@@ -148,9 +155,10 @@ const CurrentVideo = () => {
         getCurrentUser()
     }, [])
 
+
     if (loading) {
         return (
-            <h1>Loading...</h1>
+            <Skeleton/>
         )
     }
 
