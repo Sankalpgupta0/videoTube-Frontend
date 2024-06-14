@@ -2,7 +2,7 @@
     "rewrites": [
         {
             "source": "/api/:path*",
-            "destination": "https://videotube-backend-akxz.onrender.com/api/:path*"
+            "destination": "https://videotube-backend-i2ho.onrender.com/api/:path*"
         },
         {
             "source": "/(.*)",
