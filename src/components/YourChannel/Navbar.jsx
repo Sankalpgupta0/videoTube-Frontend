@@ -4,6 +4,7 @@ import Upload from '../video/Upload'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { toggleOption } from '../../store+slice/videoOptions.slice'
+import { ToastContainer, toast } from 'react-toastify';
 
 const Navbar = () => {
     const [select, setSelect] = useState(localStorage.getItem("select") || 'uploads')
@@ -23,6 +24,20 @@ const Navbar = () => {
         const res = await axios.get(url)
         setChannelInfo(res.data.data)
     }
+
+    const notifyError = ({ message }) => {
+        console.log(message);
+        toast.error(message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+    };
 
     useEffect(() => {
         getCurrentUser()
@@ -57,9 +72,24 @@ const Navbar = () => {
                         <option value="likes">liked Videos</option>
                     </select>
                 </p>
-                <Upload />
+                <Upload toast={notifyError}/>
             </div>
             <hr className='mt-10 text-white' />
+
+            <ToastContainer
+                className={`mt-[60px]`}
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={true}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+                transition:Slide
+            />
         </>
     )
 }

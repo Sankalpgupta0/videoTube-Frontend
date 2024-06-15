@@ -7,6 +7,7 @@ import CommentCard from './CommentCard';
 import EditVideo from './EditVideo';
 import DeleteVideo from './DeleteVideo';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Skeleton = () => {
     return(
@@ -34,6 +35,20 @@ const CurrentVideo = () => {
     const { videoId } = useParams();
     const navigate = useNavigate()
 
+    const notifyError = ({ message }) => {
+        console.log(message);
+        toast.error(message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+    };
+    
     const getVideoByVideoId = async () => {
         setLoading(true)
         const response = await axios.get(`/api/videos/${videoId}`)
@@ -123,7 +138,9 @@ const CurrentVideo = () => {
         const data = {
             content: comment
         }
-        const res = await axios.post(url, data)
+        await axios.post(url, data)
+        .catch(err => notifyError({message:err.response.data.message}))
+
         getAllComments();
         setComment("");
     }
@@ -158,7 +175,7 @@ const CurrentVideo = () => {
 
     if (loading) {
         return (
-            <Skeleton/>
+            <Skeleton />
         )
     }
 
@@ -191,14 +208,14 @@ const CurrentVideo = () => {
                 <p className='text-center text-gray-400'>{video.description}</p>
                 <div className='w-full flex justify-between px-10 max-md:flex-col items-center'>
                     <div className='flex gap-10 max-md:gap-2'>
-                        <img 
-                        src={user.avatar} 
-                        className='h-12 rounded-full aspect-square cursor-pointer' 
-                        onClick={() => navigate(`/home/channel/${user._id}`)}
+                        <img
+                            src={user.avatar}
+                            className='h-12 rounded-full aspect-square cursor-pointer'
+                            onClick={() => navigate(`/home/channel/${user._id}`)}
                         />
-                        <div 
-                        className='text-white gap-10 max-md:gap-2 cursor-pointer'
-                        onClick={() => navigate(`/home/channel/${user._id}`)}
+                        <div
+                            className='text-white gap-10 max-md:gap-2 cursor-pointer'
+                            onClick={() => navigate(`/home/channel/${user._id}`)}
                         >
                             <h1 className='text-lg'>{user.fullName}</h1>
                             <p>{ChannelInfo.subscribersCount}</p>
@@ -299,6 +316,20 @@ const CurrentVideo = () => {
                 }
 
             </div>
+            <ToastContainer
+                className={`mt-[60px]`}
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={true}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+                transition:Slide
+            />
         </div>
     )
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import axios from "axios";
 
-const Upload = () => {
+const Upload = ({toast}) => {
     const [title, setTitle] = useState("");
     const [descprition, setDescription] = useState("");
     const [videoFile, setVideoFile] = useState("");
@@ -34,6 +34,7 @@ const Upload = () => {
             console.log(response.data.data.video);
         } catch (error) {
             console.log(error);
+            toast({message: error.response.data.message})
         } finally {
             setUploading(false);
         }
