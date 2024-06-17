@@ -75,7 +75,7 @@ const Chat = () => {
             <div className='h-[90%] w-full overflow-y-scroll'>
                 {
                     msgFromDB.map((message, index) => {
-                        console.log(message);
+                        // console.log(message);
                         return(
                             <Message
                                 key={index}
@@ -89,12 +89,14 @@ const Chat = () => {
                 <h1 className='text-white text-center'>{msgFromSockets.length > 0?"NEW MESSAGES" : ""}</h1>
                 {
                     msgFromSockets.map((message, index) => {
-                        console.log(message);
+                        // console.log(message);
+                        message = JSON.parse(message)
                         return(
                             <Message
                                 key={index}
                                 owner={message.owner}
                                 content={message.content}
+                                date={Date.now()}
                             />
                         )
                         })

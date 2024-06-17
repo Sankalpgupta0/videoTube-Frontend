@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 
-const Message = ({ owner, content, date }) => {
+const Message = ({ owner, content, date="" }) => {
     const [currentUser, setCurrentUser] = useState("")
     const navigate = useNavigate()
     const getcurrentUser = async () => {
