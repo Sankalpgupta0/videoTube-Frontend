@@ -35,7 +35,7 @@ const Chat = () => {
 
     const connectSocket = ({userId}) => {
         // Create a WebSocket connection
-        socketRef.current = new WebSocket(`${import.meta.env.VITE_SERVER}?_id=${userId}`);
+        socketRef.current = new WebSocket(`${import.meta.env.VITE_SERVER}/home/community?_id=${userId}`);
         console.log("connected");
 
         // Handle incoming messages
