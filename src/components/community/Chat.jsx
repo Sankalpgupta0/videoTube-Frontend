@@ -35,7 +35,7 @@ const Chat = () => {
 
     const connectSocket = ({userId}) => {
         // Create a WebSocket connection
-        socketRef.current = new WebSocket(`ws://localhost:3000?_id=${userId}`);
+        socketRef.current = new WebSocket(`${import.meta.env.VITE_SERVER}?_id=${userId}`);
         console.log("connected");
 
         // Handle incoming messages
@@ -61,7 +61,7 @@ const Chat = () => {
         getMessages()
     }, [])
     return (
-        <div className='w-full inputHeight px-10 ' >
+        <div className='w-full inputHeight ' >
             <div className='h-[90%] w-full overflow-y-scroll'>
                 {
                     msgFromDB.map((message, index) => (
