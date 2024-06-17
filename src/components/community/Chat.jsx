@@ -9,6 +9,7 @@ const Chat = () => {
     const [input, setInput] = useState("")
     const [currentUser, setCurrentUser] = useState('')
     const socketRef = useRef(null);
+    const msgEndRef = useRef(null);
 
     const getMessages = () => {
         axios.get('/api/tweets')
@@ -64,21 +65,31 @@ const Chat = () => {
         getcurrentUser()
         getMessages()
     }, [])
+
+    useEffect(() => {
+        msgEndRef.current?.scrollIntoView()
+    },[msgFromSockets])
+    
     return (
         <div className='w-full inputHeight ' >
             <div className='h-[90%] w-full overflow-y-scroll'>
                 {
-                    msgFromDB.map((message, index) => (
-                        <Message
-                            key={index}
-                            owner={message.owner}
-                            content={message.content}
-                        />
-                    ))
+                    msgFromDB.map((message, index) => {
+                        console.log(message);
+                        return(
+                            <Message
+                                key={index}
+                                owner={message.owner}
+                                content={message.content}
+                                date = {message.createdAt}
+                            />
+                        )
+                    })
                 }
+                <h1 className='text-white text-center'>{msgFromSockets.length > 0?"NEW MESSAGES" : ""}</h1>
                 {
                     msgFromSockets.map((message, index) => {
-                        message = JSON.parse(message)
+                        console.log(message);
                         return(
                             <Message
                                 key={index}
@@ -88,6 +99,7 @@ const Chat = () => {
                         )
                         })
                 }
+                <div ref={msgEndRef} className='h-[10px]'></div>
             </div>
 
             <div

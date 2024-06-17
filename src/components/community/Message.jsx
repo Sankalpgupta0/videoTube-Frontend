@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import moment from 'moment'
 
-const Message = ({ owner, content }) => {
+const Message = ({ owner, content, date }) => {
     const [currentUser, setCurrentUser] = useState("")
     const navigate = useNavigate()
     const getcurrentUser = async () => {
@@ -24,9 +25,9 @@ const Message = ({ owner, content }) => {
                 <h1 className='ml-5 textOverflowHor'>
                     {content}
                 </h1>
-                <p className='text-xs text-gray-200 cursor-pointer my-2' onClick={() => navigate(`/home/channel/${owner}`)}>by: {owner}</p>
-                <div> 
-
+                <div className=' flex justify-between my-2'> 
+                    <p className='text-xs text-gray-200 cursor-pointer' onClick={() => navigate(`/home/channel/${owner}`)}>by: {owner}</p>
+                    <p className='text-xs text-gray-200'>{moment(date).format('MMMM Do YYYY, h:mm:ss a')}</p>
                 </div>
             </div>
         </div>
