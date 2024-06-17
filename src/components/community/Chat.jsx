@@ -24,6 +24,10 @@ const Chat = () => {
     }
 
     const sendMsg = () => {
+        if(input.trim() == ""){
+            console.log("input field is empty");
+            return
+        }
         if (socketRef.current.readyState === WebSocket.OPEN) {
             socketRef.current.send(input);
             // console.log(`Sent message => ${input}`);
@@ -35,7 +39,7 @@ const Chat = () => {
 
     const connectSocket = ({userId}) => {
         // Create a WebSocket connection
-        socketRef.current = new WebSocket(`${import.meta.env.VITE_SERVER}?_id=${userId}`);
+        socketRef.current = new WebSocket(`wss://videotube-backend-i2ho.onrender.com?_id=${userId}`);
         console.log("connected");
 
         // Handle incoming messages
