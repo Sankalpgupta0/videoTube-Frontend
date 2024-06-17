@@ -95,19 +95,19 @@ const Chat = () => {
                     if (e.key == "Enter")
                         sendMsg()
                 }}
-                className='w-full h-[10%]  absolute bottom-0 px-10 '
+                className='w-full h-[10%]  absolute bottom-0 px-10 max-md:px-0 '
             >
                 <div className='w-full h-full flex rounded-2xl overflow-hidden'>
                     <input
                         type="text"
-                        className='w-[90%] h-full bg-white px-5 py-5 text-xl border-none outline-none '
+                        className='w-[90%] max-md:w-[80%] h-full bg-white px-5 py-5 text-xl border-none outline-none '
                         placeholder='Enter your thoughts...'
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                     />
                     <button
                         onClick={sendMsg}
-                        className='w-[10%] rounded-tr-2xl rounded-br-2xl h-full bg-green-500 text-center hover:bg-green-700 text-white text-xl font-extrabold'>
+                        className='w-[10%] max-md:w-[20%] rounded-tr-2xl rounded-br-2xl h-full bg-green-500 text-center hover:bg-green-700 text-white text-xl font-extrabold'>
                         Post
                     </button>
                 </div>
