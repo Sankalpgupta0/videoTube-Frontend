@@ -39,3 +39,11 @@
         opacity: 0.2;
     }
 }
+
+.inputHeight{
+    height: calc(100vh - 56px);
+}
+
+.textOverflowHor{
+    overflow-wrap: break-word;
+}
