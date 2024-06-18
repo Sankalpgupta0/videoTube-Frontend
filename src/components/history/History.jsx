@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import VideoCard from '../video/VideoCard.jsx'
+import { setCurrentUrl } from '../../store+slice/videoOptions.slice.js'
+import { useDispatch } from 'react-redux'
 
 const History = () => {
     const [history, setHistory] = useState([])
-
+    const dispatch = useDispatch()
+    
     const GetHistory = async () => {
         const url = '/api/users/history'
         const response = await axios.get(url)
@@ -12,6 +15,7 @@ const History = () => {
     }
 
     useEffect(() => {
+        dispatch(setCurrentUrl())
         GetHistory()
     }, [])
     return (

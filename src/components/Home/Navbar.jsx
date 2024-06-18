@@ -11,7 +11,7 @@ import { setSearch } from '../../store+slice/videoOptions.slice';
 const Navbar = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const toggleSideBar = useSelector(state => state.sidebarReducer.open)
+    const enableSeacher = useSelector(state => state.videoOptionsReducer.enableSeacher)
 
     return (
         <>
@@ -44,7 +44,8 @@ const Navbar = () => {
                     <input
                         type="text"
                         placeholder='Search...'
-                        className='h-[40px] w-full  px-5 border-none outline-none'
+                        className={`h-[40px] w-full px-5 border-none outline-none ${enableSeacher?"":" cursor-not-allowed"}`}
+                        disabled={!enableSeacher}
                         onChange={(e) => dispatch(setSearch(e.target.value))}
                     />
                 </div>

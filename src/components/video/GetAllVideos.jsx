@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import VideoCard from './VideoCard'
-import { useSelector } from 'react-redux'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { setCurrentUrl } from '../../store+slice/videoOptions.slice'
 
 const Skeleton = () => {
 
@@ -42,7 +42,7 @@ const GetAllVideos = () => {
     const [videos, setVideos] = useState([])
     const [loading, setLoading] = useState(true)
     const [filteredVideos, setFilteredVideos] = useState([])
-
+    const dispatch = useDispatch()
     const search = useSelector((state) => state.videoOptionsReducer.search)
 
     const getVideoData = async () => {
@@ -52,6 +52,7 @@ const GetAllVideos = () => {
     }
 
     useEffect(() => {
+        dispatch(setCurrentUrl())
         getVideoData()
     }, [])
 

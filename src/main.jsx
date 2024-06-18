@@ -21,6 +21,15 @@ import Chat from './components/community/Chat.jsx'
 import Sidebar from './components/Home/Sidebar.jsx'
 import AuthLayout from './components/Auth/AuthLayout.jsx'
 import Channel from './components/channel/Channel.jsx'
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
+
+// Import your publishable key
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key")
+}
 
 const router = createBrowserRouter([
   {
@@ -125,7 +134,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <GoogleOAuthProvider clientId={`${import.meta.env.VITE_GOOGLE_AUTH_CLIENT_ID}`}>
+        <RouterProvider router={router} />
+      </GoogleOAuthProvider>
     </Provider>
   </React.StrictMode>,
 )

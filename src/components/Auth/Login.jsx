@@ -9,6 +9,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../../store+slice/auth.slice.js'
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
     const [usernameOrEmail, setUsernameOrEmail] = useState('')
@@ -46,6 +48,7 @@ const Login = () => {
 
     //     document.cookie = cookie;
     // }
+
     const notifyError = ({ message }) => {
         toast.error(message, {
             position: "top-right",
@@ -58,6 +61,7 @@ const Login = () => {
             theme: "dark",
         });
     };
+
     const notifyLogin = ({ message }) => {
         console.log(message);
         toast.success(message, {
@@ -121,6 +125,42 @@ const Login = () => {
 
     }
 
+    const handleGoogleAuthLogin = async (decode) => {
+        console.log(decode);
+        setLoading(true)
+        //username and password are same in case of google auth
+        let username;
+        setUsernameOrEmail(decode.email)
+        for (let i = 0; i < decode.email.length; i++) {
+            if (decode.email[i] === '@') {
+                username = decode.email.substring(0, i);
+                setPassword(username);
+                break;
+            }
+        }
+        const url = '/api/users/login';
+        let data = {
+            email: decode.email,
+            password: username
+        }
+
+        axios.post(url, data)
+            .then((res) => {
+                dispatch(login())
+                navigate('/home');
+                notifyLogin({ message: res.data.message })
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.log(err.response.data.statusCode);
+                setLoading(false)
+                notifyError({ message: err.response.data.statusCode.message })
+            })
+        setLoading(false);
+    }
+
+
+
     if (loading) {
         return <Loader from="Login" to="Home" />;
     }
@@ -167,6 +207,19 @@ const Login = () => {
                         >
                             Sign In
                         </button>
+                    </div>
+                    <div className="separator text-white text-xl">OR</div>
+                    <div className=' flex justify-center'>
+                        <GoogleLogin
+                            onSuccess={(credentialResponse) => {
+                                // console.log(credentialResponse);
+                                const decoded = jwtDecode(credentialResponse.credential);
+                                handleGoogleAuthLogin(decoded)
+                            }}
+                            onError={() => {
+                                console.log('Login Failed');
+                            }}
+                        />
                     </div>
                     <p className='text-gray-400'>All <span className='text-red-500'>*</span> fields are required.</p>
                 </form>

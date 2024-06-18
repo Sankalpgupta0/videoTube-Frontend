@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import axios from 'axios'
 import VideoCard from '../video/VideoCard'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setCurrentUrl } from '../../store+slice/videoOptions.slice'
 
 const YourChannel = () => {
     const [uploadedVideos, setUploadedVideos] = useState([])
     const [likedVideos, setLikedVideos] = useState([])
 
     const options = useSelector(state => state.videoOptionsReducer.options);
+    const dispatch = useDispatch()
 
     const getAllUserVideos = async () => {
         const url = '/api/dashboard/videos'
@@ -23,6 +25,7 @@ const YourChannel = () => {
     }
 
     useEffect(() => {
+        dispatch(setCurrentUrl())
         getAllUserVideos()
         getAllLikedVideos()
     }, [])

@@ -6,6 +6,8 @@ import { FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
 
 // TODO: show error message from backend into frontend
 
@@ -77,6 +79,50 @@ const Register = () => {
         }
     };
 
+    const handleGoogleAuth = async (decode) => {
+        console.log(decode);
+        let username;
+        for (let i = 0; i < decode.email.length; i++) {
+            if (decode.email[i] === '@') {
+                username = decode.email.substring(0, i);
+                setUsername(username);
+                break;
+            }
+        }
+        //username and password are same in case of google auth
+        setFullname(decode.name)
+        setEmail(decode.email)
+        setPassword(username)
+        setConfirmPassword(username)
+        try {
+            const formData = new FormData();
+            formData.append('fullName', decode.name);
+            formData.append('username', username);
+            formData.append('password', username);
+            formData.append('confirmPassword', username);
+            formData.append('email', decode.email);
+            formData.append('avatar', avatar);
+            formData.append('coverImage', coverImage);
+
+            const response = await axios.post('/api/users/register', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then(res => {
+                    setWhichMessage(true)
+                    //NOTE: make it  so that the user is redirected to dashboard after registration
+                    navigate('/login')
+                })
+                .catch(err => {
+                    notifyError({ message: err.response.data.statusCode.message })
+                    setWhichMessage(true)
+                })
+            // console.log('Server response:', response?.data);
+        } catch (error) {
+            setWhichMessage(false)
+        }
+    }
 
     return (
         <>
@@ -198,8 +244,22 @@ const Register = () => {
                             type='submit'
                         >Sign Up</button>
                     </div>
+                    <div className="separator text-white text-xl">OR</div>
+                    <div className=' flex justify-center'>
+                        <GoogleLogin
+                            onSuccess={(credentialResponse) => {
+                                // console.log(credentialResponse);
+                                const decoded = jwtDecode(credentialResponse.credential);
+                                handleGoogleAuth(decoded)
+                            }}
+                            onError={() => {
+                                console.log('Login Failed');
+                            }}
+                        />
+                    </div>
                     <p className='text-gray-400'>All <span className='text-red-500'>*</span>  fields are required.</p>
                 </div>
+
             </form>
             <ToastContainer
                 position="top-right"

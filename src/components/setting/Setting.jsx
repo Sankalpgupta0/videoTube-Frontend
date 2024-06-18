@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { logout } from '../../store+slice/auth.slice.js';
 import { useDispatch } from 'react-redux';
 import UpdateInfo from './UpdateInfo.jsx';
 import { ToastContainer, toast } from 'react-toastify';
+import { setCurrentUrl } from '../../store+slice/videoOptions.slice.js';
 
 const Setting = () => {
     const [select, setSelect] = useState("dark");
@@ -33,6 +34,10 @@ const Setting = () => {
             theme: "dark",
         });
     };
+
+    useEffect(() => {
+        dispatch(setCurrentUrl())
+    },[])
 
     return (
         <div className='w-full h-[100vh] py-10 flex justify-center items-center ' >

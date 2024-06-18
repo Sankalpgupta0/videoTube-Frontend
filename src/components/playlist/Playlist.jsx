@@ -3,10 +3,13 @@ import Navbar from './Navbar'
 import axios from 'axios'
 import PlaylistCard from './PlaylistCard'
 import { Outlet } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setCurrentUrl } from '../../store+slice/videoOptions.slice'
 
 const Playlist = () => {
     const [currentUser, setCurrentUser] = useState("")
     const [playlist, setPlaylist] = useState([])
+    const dispatch = useDispatch()
 
     const getcurrentUser = async () => {
         const url = '/api/users/current-user'
@@ -21,6 +24,7 @@ const Playlist = () => {
     }
 
     useEffect(() => {
+        dispatch(setCurrentUrl())
         getcurrentUser()
     }, [])
 

@@ -8,6 +8,8 @@ import EditVideo from './EditVideo';
 import DeleteVideo from './DeleteVideo';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { setCurrentUrl } from '../../store+slice/videoOptions.slice';
 
 const Skeleton = () => {
     return(
@@ -34,6 +36,7 @@ const CurrentVideo = () => {
 
     const { videoId } = useParams();
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const notifyError = ({ message }) => {
         console.log(message);
@@ -163,6 +166,7 @@ const CurrentVideo = () => {
     }
 
     useEffect(() => {
+        dispatch(setCurrentUrl())
         getvideoIsLiked()
         getChannelInfo()
         getcurrentUserPlaylist()

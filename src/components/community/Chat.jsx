@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Message from './Message'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { setCurrentUrl } from '../../store+slice/videoOptions.slice'
 
 
 const Chat = () => {
@@ -10,10 +12,13 @@ const Chat = () => {
     const [currentUser, setCurrentUser] = useState('')
     const socketRef = useRef(null);
     const msgEndRef = useRef(null);
-
+    const dispatch = useDispatch()
     const getMessages = () => {
         axios.get('/api/tweets')
-            .then(res => setMsgFromDB(res.data.data.tweets))
+            .then(res => {
+                setMsgFromDB(res.data.data.tweets)
+            })
+        goBottom()
     }
 
     const getcurrentUser = async () => {
@@ -61,13 +66,19 @@ const Chat = () => {
         };
     };
 
+    const goBottom = () => {
+        // i want my scrollbar to be at bottom whenever page reloads
+        msgEndRef.current.scrollIntoView({ behaviour:'smooth'})
+    }
+
     useEffect(() => {
+        dispatch(setCurrentUrl())
         getcurrentUser()
         getMessages()
     }, [])
 
     useEffect(() => {
-        msgEndRef.current?.scrollIntoView()
+        msgEndRef.current?.scrollIntoView({ behaviour:'smooth'})
     },[msgFromSockets])
     
     return (
