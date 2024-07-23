@@ -20,42 +20,42 @@ const Sidebar = () => {
             <div className={`${open ? "w-1/4" : "w-full"}  h-full bg-black/90 flex flex-col items-center gap-5`}>
                 <NavLink
                     className={` hover:bg-black px-2 py-5 rounded-lg`}
-                    to={"/home"}
+                    to={"/"}
                 >
                     <FaHome size={30} color="white" />
                 </NavLink>
 
                 <NavLink
                     className=" hover:bg-black px-2 py-5 rounded-lg"
-                    to={"/home/yourchannel"}
+                    to={"/yourchannel"}
                 >
                     <CgProfile size={30} color="white" />
                 </NavLink>
 
                 <NavLink
                     className=" hover:bg-black px-2 py-5 rounded-lg"
-                    to={"/home/history"}
+                    to={"/history"}
                 >
                     <RiFolderHistoryFill size={30} color="white" />
                 </NavLink>
 
                 {/* <NavLink
                     className=" hover:bg-black px-2 py-5 rounded-lg"
-                    to={"/home/community"}
+                    to={"/community"}
                 >
                     <IoChatbubbleEllipsesSharp size={30} color="white" />
                 </NavLink> */}
 
                 <NavLink
                     className=" hover:bg-black px-2 py-5 rounded-lg"
-                    to={"/home/playlist"}
+                    to={"/playlist"}
                 >
                     <MdPlaylistAddCircle size={30} color="white" />
                 </NavLink>
 
                 <NavLink
                     className=" hover:bg-black px-2 py-5 rounded-lg"
-                    to={"/home/Setting"}
+                    to={"/Setting"}
                 >
                     <IoMdSettings size={30} color="white" />
                 </NavLink>
@@ -66,37 +66,37 @@ const Sidebar = () => {
             >
                 <NavLink
                     className=" ml-5 px-2 py-5 hover:text-white"
-                    to={"/home"}>
+                    to={"/"}>
                     Home
                 </NavLink>
 
                 <NavLink
                     className={ ({isActive}) => isActive? "ml-5 px-2 py-5 font-extrabold text-white" : "ml-5 px-2 py-5 hover:text-white"}
-                    to={"/home/yourchannel"}>
+                    to={"/yourchannel"}>
                     Your channel
                 </NavLink>
 
                 <NavLink
                     className={ ({isActive}) => isActive? "ml-5 px-2 py-5 font-extrabold text-white" : "ml-5 px-2 py-5 hover:text-white"}
-                    to={"/home/history"}>
+                    to={"/history"}>
                     History
                 </NavLink>
 
                 {/* <NavLink
                     className={ ({isActive}) => isActive? "ml-5 px-2 py-5 font-extrabold text-white" : "ml-5 px-2 py-5 hover:text-white"}
-                    to={"/home/community"}>
+                    to={"/community"}>
                     Community
                 </NavLink> */}
 
                 <NavLink
                     className={ ({isActive}) => isActive? "ml-5 px-2 py-5 font-extrabold text-white" : "ml-5 px-2 py-5 hover:text-white"}
-                    to={"/home/playlist"}>
+                    to={"/playlist"}>
                     Your Playlist
                 </NavLink>
 
                 <NavLink
                     className={ ({isActive}) => isActive? "ml-5 px-2 py-5 font-extrabold text-white" : "ml-5 px-2 py-5 hover:text-white"}
-                    to={"/home/Setting"}>
+                    to={"/Setting"}>
                     Setting
                 </NavLink>
 

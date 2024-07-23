@@ -26,7 +26,7 @@ const Message = ({ owner, content, date="" }) => {
                     {content}
                 </h1>
                 <div className=' flex justify-between my-2'> 
-                    <p className='text-xs text-gray-200 cursor-pointer' onClick={() => navigate(`/home/channel/${owner}`)}>by: {owner}</p>
+                    <p className='text-xs text-gray-200 cursor-pointer' onClick={() => navigate(`/channel/${owner}`)}>by: {owner}</p>
                     <p className='text-xs text-gray-200'>{moment(date).format('MMMM Do YYYY, h:mm:ss a')}</p>
                 </div>
             </div>

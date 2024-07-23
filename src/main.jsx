@@ -37,7 +37,7 @@ const router = createBrowserRouter([
     element:<App/>,
     children:[
       {
-        path:'/',
+        path:'/Register',
         element:<Register />
       },
       {
@@ -49,71 +49,56 @@ const router = createBrowserRouter([
         element:<Sidebar />
       },
       {
-        path:'/home',
-        element: <AuthLayout >
-          <Home />
-        </AuthLayout>,
+        path:'/',
+        element: <Home />,
         children: [
           {
-            path: '/home',
-            element:<AuthLayout >
-
-            <GetAllVideos/>
-          </AuthLayout>,
+            path: '/',
+            element: <GetAllVideos/>,
           },
           {
-            path: '/home/:videoId',
-            element:<AuthLayout >
-
-            <CurrentVideo/>
-          </AuthLayout>,
+            path: '/:videoId',
+            element: <CurrentVideo/>
           },
           {
-            path: '/home/yourchannel',
+            path: '/yourchannel',
             element:<AuthLayout >
-
             <YourChannel/>
           </AuthLayout>,
           },
           {
-            path:'/home/setting',
+            path:'/setting',
             element:<AuthLayout >
-
             <Setting/>
           </AuthLayout>,
           },
           {
-            path:'/home/history',
+            path:'/history',
             element:<AuthLayout >
-
             <History/>
           </AuthLayout>,
           },
           {
-            path:'/home/community',
+            path:'/community',
             element:<AuthLayout >
-
             <Chat/>
           </AuthLayout>,
           },
           {
-            path:'/home/playlist',
+            path:'/playlist',
             element:<AuthLayout >
-
             <Playlist/>
           </AuthLayout>,
             children:[
               {
-                path:'/home/playlist',
+                path:'/playlist',
                 element:<AuthLayout >
-
             <AllPlaylist/>
           </AuthLayout>,
               },
               {
-                path:'/home/playlist/:playlistId',
+                path:'/playlist/:playlistId',
                 element:<AuthLayout >
-
             <ViewPlaylist/>
           </AuthLayout>,
               }
@@ -121,7 +106,7 @@ const router = createBrowserRouter([
 
           },
           {
-            path : '/home/channel/:userId',
+            path : '/channel/:userId',
             element: <Channel/>
           }
         ]

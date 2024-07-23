@@ -49,7 +49,7 @@ const ViewPlaylist = () => {
     }
 
     const copyToClipboard = () => {
-        const textToCopy = `/home/playlist/${playlistId}`;
+        const textToCopy = `/playlist/${playlistId}`;
         navigator.clipboard.writeText(textToCopy)
             .then(() => {
             console.log(textToCopy);
@@ -76,7 +76,7 @@ const ViewPlaylist = () => {
             <p 
             className='text-gray-300 mx-10 text-center'
             id='textToCopy'>
-                /home/playlist/{playlistId}
+                /playlist/{playlistId}
             </p>
             <IoCopyOutline color='white' />
         </div>

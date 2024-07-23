@@ -13,7 +13,7 @@ const RevomeVideoFromPlaylist = ({ videoId, playlistId }) => {
                     .then(() => {
                         alert(`video removed successfully`)
                     })
-                    .finally(() => navigate(`/home/playlist/${playlistId}`))
+                    .finally(() => navigate(`/playlist/${playlistId}`))
             }}>
             <MdOutlineRemoveCircleOutline size={30} />
         </div>

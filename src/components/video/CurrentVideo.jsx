@@ -13,7 +13,7 @@ import { setCurrentUrl } from '../../store+slice/videoOptions.slice';
 
 const Skeleton = () => {
     return(
-        <div className='w-full aspect-video bg-black my-20 max-h-screen VideoSkeleton'>
+        <div className='w-full aspect-video bg-black my-20 h-screen VideoSkeleton'>
 
         </div>
     )
@@ -215,11 +215,11 @@ const CurrentVideo = () => {
                         <img
                             src={user.avatar}
                             className='h-12 rounded-full aspect-square cursor-pointer'
-                            onClick={() => navigate(`/home/channel/${user._id}`)}
+                            onClick={() => navigate(`/channel/${user._id}`)}
                         />
                         <div
                             className='text-white gap-10 max-md:gap-2 cursor-pointer'
-                            onClick={() => navigate(`/home/channel/${user._id}`)}
+                            onClick={() => navigate(`/channel/${user._id}`)}
                         >
                             <h1 className='text-lg'>{user.fullName}</h1>
                             <p>{ChannelInfo.subscribersCount}</p>

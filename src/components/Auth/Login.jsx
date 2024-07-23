@@ -112,7 +112,7 @@ const Login = () => {
                 // setCookie("accessToken", res.data.data.accessToken, import.meta.env.VITE_ACCESS_TOKEN_EXPIRY);
                 // setCookie("refreshToken", res.data.data.refreshToken,import.meta.env.VITE_REFRESH_TOKEN_EXPIRY);
                 dispatch(login())
-                navigate('/home');
+                navigate('/');
                 notifyLogin({ message: res.data.message })
                 setLoading(false);
             })
@@ -147,7 +147,7 @@ const Login = () => {
         axios.post(url, data)
             .then((res) => {
                 dispatch(login())
-                navigate('/home');
+                navigate('/');
                 notifyLogin({ message: res.data.message })
                 setLoading(false);
             })

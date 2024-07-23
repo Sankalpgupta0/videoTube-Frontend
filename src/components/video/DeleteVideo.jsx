@@ -9,7 +9,7 @@ const DeleteVideo = () => {
     const handleDelete = async () => {
         const url = `/api/videos/${videoId}`
         const res = await axios.delete(url)
-        navigate('/home')
+        navigate('/')
     }
     return (
         <button

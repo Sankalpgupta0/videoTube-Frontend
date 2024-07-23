@@ -30,9 +30,9 @@ const VideoCard = ({ src, title, description, userId, time, id, inPlaylist = fal
 
     const handleChannelNavigation = async () => {
         if(currentUser._id == user._id){
-            navigate('/home/yourchannel')
+            navigate('/yourchannel')
         } else{
-            navigate(`/home/channel/${user._id}`)
+            navigate(`/channel/${user._id}`)
         }
 
     }
@@ -43,7 +43,7 @@ const VideoCard = ({ src, title, description, userId, time, id, inPlaylist = fal
                 src={src} 
                 alt={title} 
                 className=' aspect-video rounded-lg' 
-                onClick={() => navigate(`/home/${id}`)}
+                onClick={() => navigate(`/${id}`)}
                 />
                 <div className='h-full flex items-center gap-5'>
                     <img 
