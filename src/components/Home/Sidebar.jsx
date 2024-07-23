@@ -39,12 +39,12 @@ const Sidebar = () => {
                     <RiFolderHistoryFill size={30} color="white" />
                 </NavLink>
 
-                <NavLink
+                {/* <NavLink
                     className=" hover:bg-black px-2 py-5 rounded-lg"
                     to={"/home/community"}
                 >
                     <IoChatbubbleEllipsesSharp size={30} color="white" />
-                </NavLink>
+                </NavLink> */}
 
                 <NavLink
                     className=" hover:bg-black px-2 py-5 rounded-lg"
@@ -82,11 +82,11 @@ const Sidebar = () => {
                     History
                 </NavLink>
 
-                <NavLink
+                {/* <NavLink
                     className={ ({isActive}) => isActive? "ml-5 px-2 py-5 font-extrabold text-white" : "ml-5 px-2 py-5 hover:text-white"}
                     to={"/home/community"}>
                     Community
-                </NavLink>
+                </NavLink> */}
 
                 <NavLink
                     className={ ({isActive}) => isActive? "ml-5 px-2 py-5 font-extrabold text-white" : "ml-5 px-2 py-5 hover:text-white"}
