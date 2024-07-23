@@ -10,6 +10,7 @@ export default function AuthLayout({ children }) {
     const navigationFunction = () => {
         if (authStatus === "true") {
         } else {
+            alert('login to view other features')
             navigate("/login")
         }
     }
