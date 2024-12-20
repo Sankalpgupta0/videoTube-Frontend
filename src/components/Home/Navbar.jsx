@@ -53,7 +53,7 @@ const Navbar = () => {
                     id="logo"
                     onClick={() => navigate('/')}
                     className='text-white text-xl flex items-center max-md:text-sm cursor-pointer max-sm:hidden'>
-                    <PiVideoLight />Video-Tube
+                    <PiVideoLight color='purple' size={30} className='mr-1'/> Video-Tube
                 </h1>
             </div>
             <hr className='text-white ' />
