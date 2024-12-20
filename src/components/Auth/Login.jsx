@@ -173,7 +173,7 @@ const Login = () => {
                     onSubmit={loginUser}
                     className=' w-3/4 max-md:h-full max-lg:w-full h-3/4 bg-[#11161f]/80 md:rounded-2xl px-20 max-lg:px-10 max-md:px-2 shadow-2xl shadow-gray-600'>
                     <p className='text-center text-xl text-white font-bold my-10'>Login</p>
-                    <p className='text-center text-gray-300'>Don't have a Account please ! <Link to="/" className=' underline text-white'>Register</Link></p>
+                    <p className='text-center text-gray-300'>Don't have a Account please ! <Link to="/Register" className=' underline text-white'>Register</Link></p>
 
                     <div className='flex w-full justify-end items-center gap-5 my-10 max-md:flex-col'>
                         <p className='text-sm text-[#D9E8FCB0] pl-5'>username Or Email <span className='text-red-500'>*</span></p>
